@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import Login from "./login";
 
 const MenuButton = styled(IconButton)({
   marginRight: 2,
@@ -35,7 +36,15 @@ const ListContainer = styled("div")({
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [loginForm, setLoginForm] = useState(false);
 
+  const handleLoginForm = () =>{
+    setLoginForm(true);
+  }
+
+const handleCloseLoginForm = () =>{
+  setLoginForm(false);
+}
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -123,7 +132,10 @@ const Navbar = () => {
           <IconButton>
             <SearchIcon />
           </IconButton>
-          <Button color="jump">Login</Button>
+          <Button  onclick={handleLoginForm} color="jump">Login</Button>
+          {loginForm &&(
+            <Login handleCloseLoginForm = {handleCloseLoginForm} />
+          )}
         </Toolbar>
       </AppBar>
       <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>

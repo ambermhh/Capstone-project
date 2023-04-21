@@ -135,34 +135,40 @@ export default function Footer() {
             left: "9rem",
           }}
         >
-          <Grid container item xs={12}>
-            <Typography variant="body2">COMPANY</Typography>
-            <ButtonGroup
-              orientation="vertical"
-              aria-label="vertical contained button group"
-              variant="text"
-              color="secondary"
-            >
-              {company}
-            </ButtonGroup>
-            <Typography variant="body2">CONTENT</Typography>
-            <ButtonGroup
-              orientation="vertical"
-              aria-label="vertical contained button group"
-              variant="text"
-              color="secondary"
-            >
-              {content}
-            </ButtonGroup>
-            <Typography variant="body2">SOCIAL</Typography>
-            <ButtonGroup
-              orientation="vertical"
-              aria-label="vertical contained button group"
-              variant="text"
-              color="secondary"
-            >
-              {social}
-            </ButtonGroup>
+          <Grid container xs={12}>
+            <Grid item>
+              <Typography variant="body2">COMPANY</Typography>
+              <ButtonGroup
+                orientation="vertical"
+                aria-label="vertical contained button group"
+                variant="text"
+                color="secondary"
+              >
+                {company}
+              </ButtonGroup>
+            </Grid>
+            <Grid item>
+              <Typography variant="body2">CONTENT</Typography>
+              <ButtonGroup
+                orientation="vertical"
+                aria-label="vertical contained button group"
+                variant="text"
+                color="secondary"
+              >
+                {content}
+              </ButtonGroup>
+            </Grid>
+            <Grid item>
+              <Typography variant="body2">SOCIAL</Typography>
+              <ButtonGroup
+                orientation="vertical"
+                aria-label="vertical contained button group"
+                variant="text"
+                color="secondary"
+              >
+                {social}
+              </ButtonGroup>
+            </Grid>
           </Grid>
         </Box>
       </Box>

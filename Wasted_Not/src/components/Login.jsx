@@ -9,11 +9,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [resetPassword, setResetPassword] = useState('');
+  const [loginAttempt, setLoginAttempt] = useState(0);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -21,18 +24,23 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // perform login logic here
+   
+    // const response = await axios.post('/api/login', {email, password});
+    // const {token} =response.data;
+    // localStorage.setItem('token', token);
+
+
   };
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-      }}
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+    }}
     >
       <Box
         component="form"
@@ -71,9 +79,9 @@ const Login = () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={rememberMe}
-              onChange={handleRememberMeChange}
-              name="rememberMe"
+            checked={rememberMe}
+            onChange={handleRememberMeChange}
+            name="rememberMe"
             />
           }
           label="Remember me"
@@ -102,6 +110,7 @@ const Login = () => {
             </Link>
           </Grid>
       </Box>
+          <Button onClick={handleCloseLoginForm}>Close</Button>
     </Box>
   );
 };

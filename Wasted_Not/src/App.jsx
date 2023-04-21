@@ -37,7 +37,7 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <Navbar />
-        {/* <Login /> */}
+       <Login />
         <FirstSection />
         <Footer />
       </ThemeProvider>

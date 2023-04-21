@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
+const cors = require("cors");
 let dbConnect = require("./dbConnect");
 
 
 // parse requests of content-type -application / json;
 app.use(express.json());
+app.use(cors())
 
 let userRoutes = require('./routes/userRoutes')
 app.use('/api/users', userRoutes)
@@ -15,6 +17,12 @@ app.use('/api/posts', postRoutes)
 
 let commentRoutes = require('./routes/commentRoutes')
 app.use('/api/comments', commentRoutes)
+
+let recipeRoutes = require('./routes/recipeRoutes')
+app.use('/api/recipes', recipeRoutes)
+
+let mealPlannerRoutes = require('./routes/mealPlannerRoutes')
+app.use('/api/mealPlanners', mealPlannerRoutes)
 
 
 app.get("/", (req, res) => {

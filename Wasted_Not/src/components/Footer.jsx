@@ -7,7 +7,15 @@ import {
   Button,
   Typography,
   ButtonGroup,
+  createTheme,
 } from "@mui/material";
+
+
+
+
+
+ 
+
 
 const company = [
   <Button key="one">ABOUT US</Button>,
@@ -51,26 +59,30 @@ export default function Footer() {
     display: "flex",
   };
   return (
-    <Box>
-      <Typography
-        sx={{
-          position: "relative",
-          bottom: -25,
-          left: 0,
-          width: "100%",
-          padding: "3px",
-          textAlign: "center",
-          fontSize: "11rem",
-        }}
-      >
-        WASTED NOT
-      </Typography>
+    <Box sx={{width:'100%'}}>
+   
+        <Typography
+          variant="h6"
+          sx={{
+            position: "fixed",
+            bottom: 150,
+            left: 0,
+            width: "100%",
+            padding: "3px",
+            textAlign: "center",
+            fontSize:"15rem"
+
+
+          }}
+        >
+          WASTED NOT
+        </Typography>
 
       <Box
         style={containerStyle}
         sx={{
-          position: "relative",
-          bottom: 0,
+          position: "fixed",
+          bottom: 32,
           left: 0,
           width: "100%",
           backgroundColor: "#f5f5f5",
@@ -132,11 +144,10 @@ export default function Footer() {
               m: 1,
             },
             position: "relative",
-            left: "9rem",
           }}
         >
           <Grid container xs={12}>
-            <Grid item>
+            <Grid item sx={{ alignItems: "center" }}>
               <Typography variant="body2">COMPANY</Typography>
               <ButtonGroup
                 orientation="vertical"
@@ -174,10 +185,10 @@ export default function Footer() {
       </Box>
       <Box
         sx={{
-          position: "relative",
+          position: "fixed",
           bottom: 0,
           left: 0,
-          width: "99%",
+          width: "100%",
           backgroundColor: "#f5f5f5",
           padding: "4px",
           display: "flex",

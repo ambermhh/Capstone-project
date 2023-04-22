@@ -38,13 +38,14 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginForm, setLoginForm] = useState(false);
 
-  const handleLoginForm = () =>{
+  const handleLoginForm = () => {
     setLoginForm(true);
+  };
+  const handleCloseLoginForm = () => {
+    setLoginForm(loginForm);
   }
 
-const handleCloseLoginForm = () =>{
-  setLoginForm(false);
-}
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -104,8 +105,8 @@ const handleCloseLoginForm = () =>{
   );
 
   return (
-    <Box>
-      <AppBar position="stactic">
+    <Box sx={{width:'100%'}}>
+      <AppBar position="sticky">
         <Toolbar>
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
@@ -132,10 +133,13 @@ const handleCloseLoginForm = () =>{
           <IconButton>
             <SearchIcon />
           </IconButton>
-          <Button  onclick={handleLoginForm} color="jump">Login</Button>
-          {loginForm &&(
-            <Login handleCloseLoginForm = {handleCloseLoginForm} />
-          )}
+          <>
+            <Button onClick={handleLoginForm} color="jump">
+              Login
+            </Button>
+            {/* <Login  onClick={handleCloseLoginForm} /> */}
+
+          </>
         </Toolbar>
       </AppBar>
       <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>

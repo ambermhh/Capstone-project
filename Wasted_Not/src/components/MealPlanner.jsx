@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -10,18 +10,18 @@ import {
   TextField,
   Toolbar,
   Typography,
-} from '@mui/material';
-import { Add, Delete } from '@mui/icons-material';
+} from "@mui/material";
+import { Add, Delete } from "@mui/icons-material";
 
 function MealPlanner() {
   const [meals, setMeals] = useState([
-    { name: 'Breakfast', recipe: '' },
-    { name: 'Lunch', recipe: '' },
-    { name: 'Dinner', recipe: '' },
+    { name: "Breakfast", recipe: "" },
+    { name: "Lunch", recipe: "" },
+    { name: "Dinner", recipe: "" },
   ]);
 
   const handleMealChange = (index, field, value) => {
-    setMeals(prevMeals =>
+    setMeals((prevMeals) =>
       prevMeals.map((meal, i) =>
         i === index ? { ...meal, [field]: value } : meal
       )
@@ -29,20 +29,19 @@ function MealPlanner() {
   };
 
   const handleAddMeal = () => {
-    setMeals(prevMeals => [...prevMeals, { name: '', recipe: '' }]);
+    setMeals((prevMeals) => [...prevMeals, { name: "", recipe: "" }]);
   };
 
-  const handleRemoveMeal = index => {
-    setMeals(prevMeals => prevMeals.filter((_, i) => i !== index));
+  const handleRemoveMeal = (index) => {
+    setMeals((prevMeals) => prevMeals.filter((_, i) => i !== index));
   };
 
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Meal Planner</Typography>
-        </Toolbar>
-      </AppBar>
+      <Typography sx={{padding:3, textAlign: "center", fontSize: "50px" }}>
+        Meal Planner
+      </Typography>
+
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Grid container spacing={2}>
           {meals.map((meal, index) => (
@@ -51,8 +50,8 @@ function MealPlanner() {
                 <TextField
                   label="Meal Name"
                   value={meal.name}
-                  onChange={e =>
-                    handleMealChange(index, 'name', e.target.value)
+                  onChange={(e) =>
+                    handleMealChange(index, "name", e.target.value)
                   }
                   fullWidth
                 />
@@ -60,8 +59,8 @@ function MealPlanner() {
                   <TextField
                     label="Recipe"
                     value={meal.recipe}
-                    onChange={e =>
-                      handleMealChange(index, 'recipe', e.target.value)
+                    onChange={(e) =>
+                      handleMealChange(index, "recipe", e.target.value)
                     }
                     multiline
                     fullWidth
@@ -80,7 +79,7 @@ function MealPlanner() {
             </Grid>
           ))}
           <Grid item xs={12} md={4}>
-            <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
+            <Paper sx={{ p: 2, display: "flex", alignItems: "center" }}>
               <Button
                 startIcon={<Add />}
                 variant="contained"

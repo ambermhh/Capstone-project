@@ -45,7 +45,7 @@ function App() {
         <Navbar />
         <AppRoutes />
     
-        <Divider />
+
 
         <Footer />
       </ThemeProvider>

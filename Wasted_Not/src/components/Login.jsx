@@ -12,6 +12,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,16 +23,16 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:8080/api/users/login",
-    //     { email, password }
-    //   );
-    //   const { token } = response.data;
-    //   localStorage.setItem("token", token);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/users/login",
+        { email, password }
+      );
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -99,7 +100,8 @@ function Login() {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" onClick={handleCloseLoginForm}>close</Button>
+            <Button variant="contained" >close</Button>
+            {<Navbar onClick={handleCloseLoginForm} />}
           </DialogActions>
         </Box>
       </Box>

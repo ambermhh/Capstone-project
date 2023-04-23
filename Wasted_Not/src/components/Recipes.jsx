@@ -17,6 +17,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import useTrim, { TrimContext } from "./TrimContext]";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,7 +35,7 @@ const Cards = styled(Card)({
   display: "flex",
 });
 
-export default function RecipeReviewCard() {
+export default function Recipes() {
   const [expanded, setExpanded] = React.useState(false);
   const [like, setLike] = React.useState(false);
 
@@ -47,9 +48,10 @@ export default function RecipeReviewCard() {
   };
 
   return (
+    
     <Cards>
       <Grid container>
-        <Grid xs={3}>
+        <Grid item xs={3}>
           <Card sx={{ maxWidth: 345 }}>
             <CardHeader
               avatar={

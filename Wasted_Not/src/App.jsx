@@ -1,8 +1,17 @@
-import { ThemeProvider, createTheme, responsiveFontSizes, Divider } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+  Divider,
+} from "@mui/material";
 import "./allCSS/App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import FirstSection from "./components/FirstSection";
+import FirstSection from "./components/Recipes";
+import MealPlanner from "./components/MealPlanner";
+import SignUpForm from "./components/SignUpForm";
+import AppRoutes from "./components/AppRoutes";
+import Profile from "./components/Profile";
 
 let theme = createTheme({
   palette: {
@@ -29,15 +38,15 @@ let theme = createTheme({
   },
 });
 
-
-
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Navbar />
-        <FirstSection />
+        <AppRoutes />
+    
         <Divider />
+
         <Footer />
       </ThemeProvider>
     </div>

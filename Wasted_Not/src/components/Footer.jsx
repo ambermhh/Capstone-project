@@ -7,14 +7,11 @@ import {
   Button,
   Typography,
   ButtonGroup,
-  createTheme,
+
+
 } from "@mui/material";
 
 
-
-
-
- 
 
 
 const company = [
@@ -59,25 +56,25 @@ export default function Footer() {
     display: "flex",
   };
   return (
-    <Box sx={{width:'100%'}}>
-   
+    <Box sx={{ width: "100%" }}>
+
         <Typography
           variant="h6"
           sx={{
             position: "fixed",
-            bottom: 150,
+            bottom: 165,
             left: 0,
             width: "100%",
             padding: "3px",
             textAlign: "center",
-            fontSize:"15rem"
-
-
+            fontSize: "12rem",
+            opacity: 0.5,
+          
           }}
         >
           WASTED NOT
         </Typography>
-
+    
       <Box
         style={containerStyle}
         sx={{

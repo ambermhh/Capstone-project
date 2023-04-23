@@ -18,6 +18,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Login from "./login";
+import { useNavigate, Outlet, NavLink } from "react-router-dom";
 
 const MenuButton = styled(IconButton)({
   marginRight: 2,
@@ -35,6 +36,7 @@ const ListContainer = styled("div")({
 });
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginForm, setLoginForm] = useState(false);
 
@@ -42,9 +44,8 @@ const Navbar = () => {
     setLoginForm(true);
   };
   const handleCloseLoginForm = () => {
-    setLoginForm(loginForm);
-  }
-
+    setLoginForm(false);
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -57,7 +58,8 @@ const Navbar = () => {
       onKeyDown={toggleDrawer}
     >
       <List>
-        {["LIFESTYLE", "MEAL PLANNER"].map((text, index) => (
+        <Outlet/>
+        {["MEAL PLANNER"].map((text, index) => (
           <ListItem
             button
             key={text}
@@ -65,14 +67,15 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
+            onClick={() => navigate('mealplanner')}
           >
-            <ListItemText primary={text} />
+            <ListItemText primary={text}  />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {["RECIPES", "INGREDIENTS", "CUISINE"].map((text, index) => (
+        {["RECIPES"].map((text, index) => (
           <ListItem
             button
             key={text}
@@ -80,7 +83,9 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
-          >
+            onClick={() => navigate('recipes')}
+
+            >
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -88,14 +93,15 @@ const Navbar = () => {
       <Divider />
 
       <List>
-        {["PROFILE", "LOGOUT"].map((text, index) => (
+        {["PROFILE"].map((text, index) => (
           <ListItem
-            button
-            key={text}
-            sx={{
-              backgroundColor: "primary.main",
-              "&:hover": { textShadow: "2px 1px #ff3d00" },
-            }}
+          button
+          key={text}
+          sx={{
+            backgroundColor: "primary.main",
+            "&:hover": { textShadow: "2px 1px #ff3d00" },
+          }}
+          onClick={() => navigate('profile')}
           >
             <ListItemText primary={text} />
           </ListItem>
@@ -105,40 +111,58 @@ const Navbar = () => {
   );
 
   return (
-    <Box sx={{width:'100%'}}>
+    <Box sx={{ width: "100%" }}>
       <AppBar position="sticky">
         <Toolbar>
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
           </MenuButton>
-          <Title variant="h6">
-            WASTED NOT
-            <img
-              style={{
-                width: "40px",
-                height: "40px",
-                verticalAlign: "middle",
-                margin: "10px",
-              }}
-              src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png"
+          <NavLink
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              padding: "3px",
+         
+            }}
+          >
+            <Title variant="h6">
+              WASTED NOT
+              <img
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  verticalAlign: "middle",
+                  margin: "10px",
+                }}
+                src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png"
+              />
+            </Title>
+          </NavLink>
+          <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'end'}}>
+            <TextField
+              id="search"
+              label="Search"
+              variant="outlined"
+              size="small"
             />
-          </Title>
-
-          <TextField
-            id="search"
-            label="Search"
-            variant="outlined"
-            size="small"
-          />
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+          </Box>
           <>
-            <Button onClick={handleLoginForm} color="jump">
+            <Button
+              onClick={handleLoginForm}
+              color="jump"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "end",
+              }}
+            >
               Login
             </Button>
             {/* <Login  onClick={handleCloseLoginForm} /> */}
-
           </>
         </Toolbar>
       </AppBar>

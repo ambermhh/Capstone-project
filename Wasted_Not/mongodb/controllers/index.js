@@ -3,5 +3,6 @@ module.exports={
     postController: require('./postController'),
     commentController: require('./commentController'),
     mealPlannerController: require('./mealPlannerController'),
-    recipeController: require('./recipeController')
+    recipeController: require('./recipeController'),
+    subscriptionController: require('./subscriptionController')
     }

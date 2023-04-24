@@ -4,5 +4,6 @@ module.exports = {
   Post: require("./posts"),
   Comment: require("./comments"),
   Recipe: require("./recipes"),
-  MealPlanner: require("./mealPlanners")
+  MealPlanner: require("./mealPlanners"),
+  Subscription: require("./subscriptions"),
 };

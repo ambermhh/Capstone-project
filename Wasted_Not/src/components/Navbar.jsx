@@ -58,7 +58,7 @@ const Navbar = () => {
       onKeyDown={toggleDrawer}
     >
       <List>
-        <Outlet/>
+        <Outlet />
         {["MEAL PLANNER"].map((text, index) => (
           <ListItem
             button
@@ -67,9 +67,9 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
-            onClick={() => navigate('mealplanner')}
+            onClick={() => navigate("mealplanner")}
           >
-            <ListItemText primary={text}  />
+            <ListItemText primary={text} />
           </ListItem>
         ))}
       </List>
@@ -83,9 +83,8 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
-            onClick={() => navigate('recipes')}
-
-            >
+            onClick={() => navigate("recipes")}
+          >
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -95,13 +94,13 @@ const Navbar = () => {
       <List>
         {["PROFILE"].map((text, index) => (
           <ListItem
-          button
-          key={text}
-          sx={{
-            backgroundColor: "primary.main",
-            "&:hover": { textShadow: "2px 1px #ff3d00" },
-          }}
-          onClick={() => navigate('profile')}
+            button
+            key={text}
+            sx={{
+              backgroundColor: "primary.main",
+              "&:hover": { textShadow: "2px 1px #ff3d00" },
+            }}
+            onClick={() => navigate("profile")}
           >
             <ListItemText primary={text} />
           </ListItem>
@@ -111,9 +110,9 @@ const Navbar = () => {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <AppBar position="sticky">
-        <Toolbar>
+    <>
+      <AppBar position="sticky" className="AppBar" sx={{}} >
+        <Toolbar >
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
           </MenuButton>
@@ -123,7 +122,6 @@ const Navbar = () => {
               textDecoration: "none",
               color: "black",
               padding: "3px",
-         
             }}
           >
             <Title variant="h6">
@@ -139,7 +137,7 @@ const Navbar = () => {
               />
             </Title>
           </NavLink>
-          <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'end'}}>
+          <Box sx={{ display: "flex", justifyContent:'flex-end' }}>
             <TextField
               id="search"
               label="Search"
@@ -149,27 +147,19 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
+            
+              <Button onClick={handleLoginForm} color="jump">
+                Login
+              </Button>
+              <Login loginOpen={loginForm} closeForm={handleCloseLoginForm} />
+        
           </Box>
-          <>
-            <Button
-              onClick={handleLoginForm}
-              color="jump"
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "end",
-              }}
-            >
-              Login
-            </Button>
-            {/* <Login  onClick={handleCloseLoginForm} /> */}
-          </>
         </Toolbar>
       </AppBar>
       <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>
         {list()}
       </Drawer>
-    </Box>
+    </>
   );
 };
 

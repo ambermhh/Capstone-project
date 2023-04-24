@@ -12,11 +12,19 @@ import {
   DialogActions,
 } from "@mui/material";
 import axios from "axios";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
-function Login() {
+function Login({ closeForm, loginOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignUpForm = () => {
+    navigate("/SignUpForm")
+  }
+
+
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -30,82 +38,103 @@ function Login() {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
+      closeForm();
+      navigate("/profile");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Dialog open={open} onClose={close}>
-      <Box
+    <Box sx={{ textAlign: "center" }}>
+      <Dialog
+        open={loginOpen}
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
+          "& .MuiDialog-paper": {
+            backgroundColor: "white",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.24)",
+          },
         }}
       >
-        <Box
-          component="form"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            p: 3,
-            border: "1px solid gray",
-            borderRadius: "10px",
-          }}
-          onSubmit={handleLogin}
-        >
-          <DialogTitle>WASTED_NOT</DialogTitle>
+        <Box component="form" onSubmit={handleLogin}>
+          <DialogTitle sx={{ textAlign: "center" }}>WASTED_NOT</DialogTitle>
           <DialogContent>
             <DialogContentText sx={{ textAlign: "center" }}>
               LOGIN
             </DialogContentText>
-            <TextField
-              autoFocus
-              id="email"
-              label="Email"
-              variant="outlined"
-              margin="normal"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              variant="outlined"
-              margin="normal"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-            <Button type="submit" variant="contained" sx={{ mt: 3 }}>
+            <Box sx={{ borderSpacing: 5 }}>
+              <TextField
+                sx={{ border: "2px solid black" }}
+                autoFocus
+                id="email"
+                label="Email"
+                variant="outlined"
+                margin="normal"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+              <TextField
+                sx={{ border: "2px solid black" }}
+                id="password"
+                label="Password"
+                type="password"
+                variant="outlined"
+                margin="normal"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </Box>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ textAlign: "center", mt: 2, border: "2px solid black" }}
+            >
               Login
             </Button>
+
             <Grid container sx={{ mt: 2 }}></Grid>
             <Box sx={{ mt: 2 }}>
-              <Button variant="contained">Login with Facebook</Button>
-              <Button variant="contained" sx={{ ml: 1 }}>
+              <Button
+                variant="contained"
+                sx={{ ml: 1, textAlign: "center", border: "2px solid black" }}
+              >
+                Login with Facebook
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ ml: 1, textAlign: "center", border: "2px solid black" }}
+              >
                 Login with Google
               </Button>
-            </Box>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Sign Up
-              </Link>
-            </Grid>
+            </Box >
+            <Button
+              onClick={handleSignUpForm}
+              variant="contained"
+              sx={{ textAlign: "center", mt: 2, border: "2px solid black" }}
+            >
+              SIGN UP
+            </Button>
+
+            {/* <Link open={isOpen} sx={{border:'2px solid black', color:'black'}}>
+              <Button onClick={handleSignUpForm}>SIGN UP</Button>
+            </Link> */}
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" >close</Button>
-            {<Navbar onClick={handleCloseLoginForm} />}
+            <Button
+              variant="contained"
+              onClick={closeForm}
+              sx={{ textAlign: "center", border: "2px solid black" }}
+            >
+              <CloseIcon />
+            </Button>
           </DialogActions>
         </Box>
-      </Box>
-    </Dialog>
+      </Dialog>
+    </Box>
   );
 }
 

@@ -24,6 +24,8 @@ app.use('/api/recipes', recipeRoutes)
 let mealPlannerRoutes = require('./routes/mealPlannerRoutes')
 app.use('/api/mealPlanners', mealPlannerRoutes)
 
+let subscriptionRoutes = require('./routes/subscriptionRoutes')
+app.use('/api/subscriptions', subscriptionRoutes)
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my MongoDB application." });

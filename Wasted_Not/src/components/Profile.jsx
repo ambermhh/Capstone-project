@@ -3,7 +3,7 @@ import { Grid, Avatar, Typography, Box, Divider, Button } from "@mui/material";
 
 const Profile = () => {
   return (
-    <Grid container direction="column" alignItems="center">
+    <Grid container direction="column"  sx={{padding:10, alignItems:'start'}}>
       <Grid item>
         <Avatar
           alt="User Profile Picture"

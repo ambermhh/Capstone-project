@@ -11,5 +11,6 @@ const userSchema = new Schema({
   profile_picture: { type: String},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  likes: { type: Array }
 });
 module.exports = mongoose.model("users", userSchema);

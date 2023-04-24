@@ -14,10 +14,11 @@ const SignUpForm = ({ isOpen, handleClose }) => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = (event) => {
     event.preventDefault();
+
     // Handle form submission logic here
+
     console.log({
       firstName,
       lastName,
@@ -29,7 +30,7 @@ const SignUpForm = ({ isOpen, handleClose }) => {
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose}>
+    <Dialog >
       <DialogTitle>Sign Up</DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit}>

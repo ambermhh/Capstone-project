@@ -26,13 +26,14 @@ const loginUser = async (req, res) => {
       res.status(400).json({ result: "All input is required" });
     }
     // Validate if user exists in our database
-    const user = await Models.User.findOne({ where: { email: email } });
-
+    const user = await Models.User.findOne( { email: email } );
+     console.log(user);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign({ userId: user.id, email }, process.env.JWT_KEY, {
         expiresIn: "2h",
       });
+      console.log(token);
 
       // send back logged in user details
       res.status(200).json({

@@ -10,7 +10,7 @@ router.get('/', auth, (req, res) => {
 
 router.post('/login', (req, res) => {
   console.log("test")
-  // Controllers.userController.loginUser(req, res)
+  Controllers.userController.loginUser(req, res)
 })
 
 

@@ -1,18 +1,21 @@
 "use strict";
 let Models = require("../models"); //matches index.js
-const getRecipe = (res) => {
 
-  Models.Recipe.findAll({})
+
+
+const getSubsriptions = (res) => {
+  //finds all users
+  Models.Subscription.find({})
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
       res.send({ result: 500, error: err.message });
     });
 };
-const createRecipe = (data, res) => {
+const createSubscription = (data, res) => {
   //creates a new user using JSON data POSTed in request body
   console.log(data);
-  new Models.Recipe(data)
+  new Models.Subscription(data)
     .save()
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -21,10 +24,10 @@ const createRecipe = (data, res) => {
     });
 };
 
-const updateRecipe = (req, res) => {
+const updateSubscription = (req, res) => {
   //updates the user matching the ID from the param using JSON data POSTed in request body
   console.log(req.body);
-  Models.Recipe.findByIdAndUpdate(req.params.id, req.body, {
+  Models.Subscription.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
   })
     .then((data) => res.send({ result: 200, data: data }))
@@ -33,9 +36,9 @@ const updateRecipe = (req, res) => {
       res.send({ result: 500, error: err.message });
     });
 };
-const deleteRecipe = (req, res) => {
+const deleteSubscription = (req, res) => {
   //deletes the user matching the ID from the param
-  Models.Recipe.findByIdAndRemove(req.params.id, req.body, {
+  Models.Subscription.findByIdAndRemove(req.params.id, req.body, {
     useFindAndModify: false,
   })
     .then((data) => res.send({ result: 200, data: data }))
@@ -45,9 +48,8 @@ const deleteRecipe = (req, res) => {
     });
 };
 module.exports = {
-getRecipe,
-createRecipe,
-updateRecipe,
-deleteRecipe,
-
+  getSubsriptions,
+  createSubscription,
+  updateSubscription,
+  deleteSubscription,
 };

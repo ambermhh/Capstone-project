@@ -6,12 +6,13 @@ import {
 } from "@mui/material";
 import "./allCSS/App.css";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Footer from "./components/Footers/Footer";
 import FirstSection from "./components/Recipes";
 import MealPlanner from "./components/MealPlanner";
 import SignUpForm from "./components/SignUpForm";
-import AppRoutes from "./components/AppRoutes";
+import AppRoutes from "./components/Routes/AppRoutes";
 import Profile from "./components/Profile";
+import { Login } from "@mui/icons-material";
 
 let theme = createTheme({
   palette: {

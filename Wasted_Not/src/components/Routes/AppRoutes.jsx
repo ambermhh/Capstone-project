@@ -1,8 +1,9 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
-import MealPlanner from './MealPlanner'
-import Profile from './Profile'
-import Recipes from './Recipes'
+import MealPlanner from '../MealPlanner'
+import Profile from '../Profile'
+import Recipes from '../Recipes'
+import SignUpForm from '../SignUpForm'
 
 export default function AppRoutes(props) {
   return (
@@ -10,6 +11,7 @@ export default function AppRoutes(props) {
       <Route path='/mealplanner' element={<MealPlanner/>}/>
       <Route path='/profile' element={<Profile />}/>
      <Route path='/recipes' element={<Recipes/>}/>
+     <Route path='/signupform' element={<SignUpForm/>}/>
     </Routes>
   )
 }

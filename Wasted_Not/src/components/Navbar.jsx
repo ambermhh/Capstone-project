@@ -19,6 +19,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Login from "./login";
 import { useNavigate, Outlet, NavLink } from "react-router-dom";
+import SignUpForm from "./SignUpForm";
+
+
 
 const MenuButton = styled(IconButton)({
   marginRight: 2,
@@ -39,6 +42,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginForm, setLoginForm] = useState(false);
+  const [signUpForm, setSignUpForm] = useState(false);
 
   const handleLoginForm = () => {
     setLoginForm(true);
@@ -67,7 +71,7 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
-            onClick={() => navigate("mealplanner")}
+            onClick={() => navigate("/mealplanner")}
           >
             <ListItemText primary={text} />
           </ListItem>
@@ -83,7 +87,7 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #00e676" },
             }}
-            onClick={() => navigate("recipes")}
+            onClick={() => navigate("/recipes")}
           >
             <ListItemText primary={text} />
           </ListItem>
@@ -100,7 +104,7 @@ const Navbar = () => {
               backgroundColor: "primary.main",
               "&:hover": { textShadow: "2px 1px #ff3d00" },
             }}
-            onClick={() => navigate("profile")}
+            onClick={() => navigate("/profile")}
           >
             <ListItemText primary={text} />
           </ListItem>
@@ -111,8 +115,8 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="sticky" className="AppBar" sx={{}} >
-        <Toolbar >
+      <AppBar position="sticky" className="AppBar" sx={{}}>
+        <Toolbar>
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
           </MenuButton>
@@ -137,7 +141,7 @@ const Navbar = () => {
               />
             </Title>
           </NavLink>
-          <Box sx={{ display: "flex", justifyContent:'flex-end' }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <TextField
               id="search"
               label="Search"
@@ -147,12 +151,20 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            
-              <Button onClick={handleLoginForm} color="jump">
-                Login
-              </Button>
-              <Login loginOpen={loginForm} closeForm={handleCloseLoginForm} />
-        
+
+            <Button onClick={handleLoginForm} color="jump">
+              Login
+            </Button>
+            <Login
+              loginOpen={loginForm}
+              closeForm={handleCloseLoginForm}
+              signUpForm={signUpForm}
+              toggleSignUpForm={setSignUpForm}
+            />
+            <SignUpForm
+              signUpForm={signUpForm}
+              toggleSignUpForm={setSignUpForm}
+            />
           </Box>
         </Toolbar>
       </AppBar>

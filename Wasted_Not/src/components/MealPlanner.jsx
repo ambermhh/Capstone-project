@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  AppBar,
   Box,
   Button,
   Container,
@@ -8,12 +7,10 @@ import {
   IconButton,
   Paper,
   TextField,
-  Toolbar,
-  Typography,
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 
-function MealPlanner() {
+function MealPlanner(props) {
   const [meals, setMeals] = useState([
     { name: "Breakfast", recipe: "" },
     { name: "Lunch", recipe: "" },
@@ -38,10 +35,6 @@ function MealPlanner() {
 
   return (
     <div>
-      <Typography sx={{padding:3, textAlign: "center", fontSize: "50px" }}>
-        Meal Planner
-      </Typography>
-
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Grid container spacing={2}>
           {meals.map((meal, index) => (

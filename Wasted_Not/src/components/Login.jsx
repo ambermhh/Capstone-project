@@ -3,28 +3,25 @@ import {
   Box,
   Button,
   Grid,
-  Link,
   TextField,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  DialogActions,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Login({ closeForm, loginOpen }) {
+function Login({ closeForm, loginOpen, toggleSignUpForm }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSignUpForm = () => {
-    navigate("/SignUpForm")
-  }
-
-
+    closeForm();
+    toggleSignUpForm(true);
+  };
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -49,21 +46,38 @@ function Login({ closeForm, loginOpen }) {
     <Box sx={{ textAlign: "center" }}>
       <Dialog
         open={loginOpen}
+        maxWidth="md"
         sx={{
           "& .MuiDialog-paper": {
             backgroundColor: "white",
-            borderRadius: "8px",
+            borderRadius: "10px",
             boxShadow: "0 4px 12px rgba(0,0,0,0.24)",
           },
         }}
       >
+        <Box sx={{display:'flex'}}>
+        <img style={{width:'400px'}}src="https://i.pinimg.com/564x/63/17/91/63179104985032222e40fbf9e6348af8.jpg" />
         <Box component="form" onSubmit={handleLogin}>
-          <DialogTitle sx={{ textAlign: "center" }}>WASTED_NOT</DialogTitle>
-          <DialogContent>
-            <DialogContentText sx={{ textAlign: "center" }}>
+          <DialogTitle sx={{ textAlign: "center", fontSize: "30px" }}>
+            WASTED_NOT
+          </DialogTitle>
+          <Button
+            variant="contained"
+            onClick={closeForm}
+            sx={{
+              border: "2px solid black",
+              position: "absolute",
+              top: 0,
+              right: 0,
+            }}
+          >
+            <CloseIcon />
+          </Button>
+          <DialogContent sx={{ height: "400px" }}>
+            <DialogContentText sx={{ textAlign: "center", fontSize: "25px" }}>
               LOGIN
             </DialogContentText>
-            <Box sx={{ borderSpacing: 5 }}>
+            <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
               <TextField
                 sx={{ border: "2px solid black" }}
                 autoFocus
@@ -75,6 +89,7 @@ function Login({ closeForm, loginOpen }) {
                 onChange={handleEmailChange}
                 required
               />
+
               <TextField
                 sx={{ border: "2px solid black" }}
                 id="password"
@@ -87,7 +102,7 @@ function Login({ closeForm, loginOpen }) {
                 required
               />
             </Box>
-            <br />
+
             <Button
               type="submit"
               variant="contained"
@@ -95,44 +110,21 @@ function Login({ closeForm, loginOpen }) {
             >
               Login
             </Button>
-
             <Grid container sx={{ mt: 2 }}></Grid>
-            <Box sx={{ mt: 2 }}>
-              <Button
-                variant="contained"
-                sx={{ ml: 1, textAlign: "center", border: "2px solid black" }}
-              >
-                Login with Facebook
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ ml: 1, textAlign: "center", border: "2px solid black" }}
-              >
-                Login with Google
-              </Button>
-            </Box >
             <Button
               onClick={handleSignUpForm}
               variant="contained"
-              sx={{ textAlign: "center", mt: 2, border: "2px solid black" }}
+              sx={{
+                alignItem: "center",
+                textAlign: "center",
+                mt: 2,
+                border: "2px solid black",
+              }}
             >
               SIGN UP
             </Button>
-
-            {/* <Link open={isOpen} sx={{border:'2px solid black', color:'black'}}>
-              <Button onClick={handleSignUpForm}>SIGN UP</Button>
-            </Link> */}
           </DialogContent>
-          <DialogActions>
-            <Button
-              variant="contained"
-              onClick={closeForm}
-              sx={{ textAlign: "center", border: "2px solid black" }}
-            >
-              <CloseIcon />
-            </Button>
-          </DialogActions>
-        </Box>
+        </Box></Box>
       </Dialog>
     </Box>
   );

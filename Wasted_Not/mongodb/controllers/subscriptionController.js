@@ -20,7 +20,7 @@ const createSubscription = (data, res) => {
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
-      res.send({ result: 500, error: err.message });
+      res.status(500).send({ result: 500, error: err.message });
     });
 };
 

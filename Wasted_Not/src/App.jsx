@@ -6,7 +6,6 @@ import "./allCSS/App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footers/Footer";
 import AppRoutes from "./components/Routes/AppRoutes";
-import Home from "./components/Home";
 
 let theme = createTheme({
   palette: {
@@ -39,7 +38,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <Navbar />
         <AppRoutes />
-        <Home />
         <Footer />
       </ThemeProvider>
     </div>

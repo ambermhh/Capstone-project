@@ -18,7 +18,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import recipes from "./recipeCard.json"
-// import useTrim, { TrimContext } from "./TrimContext";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

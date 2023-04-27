@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
+import SaveMealPlanner from "./SaveMealPlanner";
 
 function MealPlanner(props) {
   const [meals, setMeals] = useState([
@@ -85,6 +86,9 @@ function MealPlanner(props) {
           </Grid>
         </Grid>
       </Container>
+      <Box sx={{float:'right'}}>
+        <SaveMealPlanner />
+      </Box>
     </div>
   );
 }

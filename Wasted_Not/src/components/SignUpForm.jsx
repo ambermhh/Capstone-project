@@ -12,10 +12,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
@@ -26,11 +25,11 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
     try {
       const response = await axios.post(
         "http://localhost:8080/api/users/register",
-        { email, password, phoneNumber, firstName, lastName, username }
+        { email, password, first_name, last_name, username }
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
-      closeForm();
+      toggleSignUpForm(false);
       navigate("/profile");
     } catch (error) {
       console.error(error);
@@ -61,7 +60,7 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
             <TextField
               margin="dense"
               label="First Name"
-              value={firstName}
+              value={first_name}
               onChange={(event) => setFirstName(event.target.value)}
               fullWidth
               required
@@ -69,17 +68,8 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
             <TextField
               margin="dense"
               label="Last Name"
-              value={lastName}
+              value={last_name}
               onChange={(event) => setLastName(event.target.value)}
-              fullWidth
-              required
-            />
-            <TextField
-              margin="dense"
-              label="Phone Number"
-              type="tel"
-              value={phoneNumber}
-              onChange={(event) => setPhoneNumber(event.target.value)}
               fullWidth
               required
             />
@@ -113,17 +103,11 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
             <Box sx={{ display: "flex" }}>
               <Button onClick={() => toggleSignUpForm(false)}>Cancel</Button>
               <Button
+                type="submit"
                 variant="contained"
                 sx={{ textAlign: "center", mt: 2, border: "2px solid black" }}
               >
                 SIGN UP
-              </Button>
-              <Button
-                onClick={() => toggleSignUpForm(false)}
-                variant="contained"
-                sx={{ border: "2px solid black", width: 40, height: 40 }}
-              >
-                <CloseIcon />
               </Button>
             </Box>
           </form>

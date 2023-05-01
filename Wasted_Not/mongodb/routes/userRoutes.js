@@ -7,6 +7,9 @@ const auth = require("../middleware/auth");
 router.get('/', auth, (req, res) => {
   Controllers.userController.getUsers(res);
 })
+router.get('/:id', auth, (req, res) => {
+  Controllers.userController.getUser(res);
+})
 
 router.post('/login', (req, res) => {
   console.log("test")

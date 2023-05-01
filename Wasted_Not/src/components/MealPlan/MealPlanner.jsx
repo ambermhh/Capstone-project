@@ -17,14 +17,13 @@ function MealPlanner(props) {
     { name: "Lunch", recipe: "" },
     { name: "Dinner", recipe: "" },
   ]);
-
-  const handleMealChange = (index, field, value) => {
-    setMeals((prevMeals) =>
-      prevMeals.map((meal, i) =>
-        i === index ? { ...meal, [field]: value } : meal
-      )
-    );
-  };
+  
+  
+  const handleMealChange = (index, inputname, inputvalue) => {    
+    setMeals((prevMeals) => prevMeals.map((meal, i) => i !== index  ? meal : {...meal,[inputname]:inputvalue}));
+  console.log(index, inputname, inputvalue)
+  }    
+ 
 
   const handleAddMeal = () => {
     setMeals((prevMeals) => [...prevMeals, { name: "", recipe: "" }]);
@@ -86,8 +85,8 @@ function MealPlanner(props) {
           </Grid>
         </Grid>
       </Container>
-      <Box sx={{float:'right'}}>
-        <SaveMealPlanner />
+      <Box sx={{ float: "right" }}>
+        <SaveMealPlanner meals={meals} dayIndex={props.dayIndex}/>
       </Box>
     </div>
   );

@@ -11,21 +11,16 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  TextField,
   styled,
-  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import Login from "./login";
+import Login from "./Login";
 import { useNavigate, Outlet, NavLink } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
-
-
+import Search from "./Search";
 
 const MenuButton = styled(IconButton)({
   marginRight: 2,
-  color: "white",
 });
 
 const Title = styled(Typography)({
@@ -63,59 +58,48 @@ const Navbar = () => {
     >
       <List>
         <Outlet />
-        {["MEAL PLANNER"].map((text, index) => (
-          <ListItem
-            button
-            key={text}
-            sx={{
-              backgroundColor: "primary.main",
-              "&:hover": { textShadow: "2px 1px #00e676" },
-            }}
-            onClick={() => navigate("/mealplanner")}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+
+        <ListItem
+          button
+          sx={{
+            "&:hover": { textShadow: "2px 1px #00e676" },
+          }}
+          onClick={() => navigate("/mealplanner")}
+        >
+          <ListItemText>MEAL PLANNER</ListItemText>
+        </ListItem>
       </List>
       <Divider />
       <List>
-        {["RECIPES"].map((text, index) => (
-          <ListItem
-            button
-            key={text}
-            sx={{
-              backgroundColor: "primary.main",
-              "&:hover": { textShadow: "2px 1px #00e676" },
-            }}
-            onClick={() => navigate("/recipes")}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          sx={{
+            "&:hover": { textShadow: "2px 1px #00e676" },
+          }}
+          onClick={() => navigate("/recipePosts")}
+        >
+          <ListItemText>RECIPES</ListItemText>
+        </ListItem>
       </List>
       <Divider />
 
       <List>
-        {["PROFILE"].map((text, index) => (
-          <ListItem
-            button
-            key={text}
-            sx={{
-              backgroundColor: "primary.main",
-              "&:hover": { textShadow: "2px 1px #ff3d00" },
-            }}
-            onClick={() => navigate("/profile")}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          sx={{
+            "&:hover": { textShadow: "2px 1px #ff3d00" },
+          }}
+          onClick={() => navigate("/profile")}
+        >
+          <ListItemText>PROFILE</ListItemText>
+        </ListItem>
       </List>
     </ListContainer>
   );
 
   return (
     <>
-      <AppBar position="sticky" className="AppBar" sx={{}}>
+      <AppBar position="sticky" className="AppBar">
         <Toolbar>
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
@@ -141,31 +125,20 @@ const Navbar = () => {
               />
             </Title>
           </NavLink>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <TextField
-              id="search"
-              label="Search"
-              variant="outlined"
-              size="small"
-            />
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-
-            <Button onClick={handleLoginForm} color="jump">
-              Login
-            </Button>
-            <Login
-              loginOpen={loginForm}
-              closeForm={handleCloseLoginForm}
-              signUpForm={signUpForm}
-              toggleSignUpForm={setSignUpForm}
-            />
-            <SignUpForm
-              signUpForm={signUpForm}
-              toggleSignUpForm={setSignUpForm}
-            />
-          </Box>
+          <Search />
+          <Button onClick={handleLoginForm} color="jump">
+            Login
+          </Button>
+          <Login
+            loginOpen={loginForm}
+            closeForm={handleCloseLoginForm}
+            signUpForm={signUpForm}
+            toggleSignUpForm={setSignUpForm}
+          />
+          <SignUpForm
+            signUpForm={signUpForm}
+            toggleSignUpForm={setSignUpForm}
+          />
         </Toolbar>
       </AppBar>
       <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>

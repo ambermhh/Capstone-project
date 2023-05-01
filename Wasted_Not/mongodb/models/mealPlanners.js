@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const mealPlannerSchema = new Schema({
-  name: { type: String,required: true },
   UserId: { type: Schema.Types.ObjectId, ref: "User" },
-  monday: {type: String},
-  tuesday: {type: String},
-  wednesday: {type: String},
-  thursday: {type: String},
-  friday: {type: String},
-  satureday: {type: String},
-  sunday: {type: String},
+  sunday: [{name: {type: String}, recipe: {type: String}}],
+  monday: [{name: {type: String}, recipe: {type: String}}],
+  tuesday: [{name: {type: String}, recipe: {type: String}}],
+  wednesday: [{name: {type: String}, recipe: {type: String}}],
+  thursday: [{name: {type: String}, recipe: {type: String}}],
+  friday: [{name: {type: String}, recipe: {type: String}}],
+  saturday: [{name: {type: String}, recipe: {type: String}}],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
+
 module.exports = mongoose.model("mealPlanners", mealPlannerSchema);

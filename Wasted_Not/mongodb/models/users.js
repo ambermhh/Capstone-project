@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { number, array } = require("prop-types");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -7,10 +8,12 @@ const userSchema = new Schema({
   username: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true, unique: true },
   password: { type: String, required: true },
-  user_bio: { type: String},
-  profile_picture: { type: String},
+  numFollowers: { type: Number, default: 0 },
+  numFollowing: { type: Number, default: 0 },
+  user_bio: { type: String },
+  profile_picture: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  likes: { type: Array }
+  
 });
 module.exports = mongoose.model("users", userSchema);

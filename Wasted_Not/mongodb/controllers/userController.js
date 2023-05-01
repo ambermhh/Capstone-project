@@ -16,6 +16,19 @@ const getUsers = (res) => {
     });
 };
 
+const getUser = (res) => {
+  console.log(req.params.id)
+  Models.User.findAll({ id: req.params.id })
+    .then(function (data) {
+      res
+        .status(200)
+        .json({ result: "User data fetched successfully", data: data });
+    })
+    .catch((err) => {
+      res.status(500).json({ result: err.message });
+    });
+};
+
 const loginUser = async (req, res) => {
   try {
     // Get user input from request body
@@ -163,4 +176,5 @@ module.exports = {
   updateUser,
   deleteUser,
   addProfileImage,
+  getUser
 };

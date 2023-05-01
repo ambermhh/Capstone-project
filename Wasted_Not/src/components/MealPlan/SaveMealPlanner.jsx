@@ -1,11 +1,17 @@
 import { Button } from "@mui/material";
 import React from "react";
+import axios from "axios";
 
-export default function SaveMealPlanner() {
+export default function SaveMealPlanner(props) {
+  const userData = JSON.parse(localStorage.getItem("currentUser"));
+
   const handleSaveClick = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8080/api/mealPlanners/create")
+      .post(
+        `http://localhost:8080/api/mealPlanners/create/${userData._id}/${props.dayIndex}`,
+        props.meals
+      )
       .then((response) => {
         console.log(response);
       })
@@ -19,7 +25,7 @@ export default function SaveMealPlanner() {
       <Button
         type="submit"
         variant="contrained"
-        onSubmit={handleSaveClick}
+        onClick={handleSaveClick}
         sx={{ fontSize: "26px", border: "2px solid black" }}
       >
         SAVE

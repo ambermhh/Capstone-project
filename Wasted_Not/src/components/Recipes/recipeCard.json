@@ -2,7 +2,9 @@
     {
         "id":"1",
         "avatar":"WN",
+        "username":"user1",
         "title":"GAZPACHO",
+        "likes":"",
         "date":"September 14, 2016",
         "image":"./food-pic/Gazpacho.png",
         "description":" Gazpacho is a refreshing summer soup that originates from Spain. It's made with fresh, raw vegetables like tomatoes, cucumber,and bell peppers. Gazpacho is a great dish to make zero wastebecause it's made entirely with plant-based ingredients that are commonly found at farmers markets or in your own garden.",
@@ -11,7 +13,9 @@
     {
         "id":"2",
         "avatar":"WN",
+        "username":"user1",
         "title":"GAZPACHO",
+        "likes":"",
         "date":"September 14, 2016",
         "image":"./food-pic/Gazpacho.png",
         "description":" Gazpacho is a refreshing summer soup that originates from Spain. It's made with fresh, raw vegetables like tomatoes, cucumber,and bell peppers. Gazpacho is a great dish to make zero wastebecause it's made entirely with plant-based ingredients that are commonly found at farmers markets or in your own garden.",
@@ -22,7 +26,9 @@
     {
         "id":"3",
         "avatar":"WN",
+        "username":"user1",
         "title":"GAZPACHO",
+        "likes":"",
         "date":"September 14, 2016",
         "image":"./food-pic/Gazpacho.png",
         "description":" Gazpacho is a refreshing summer soup that originates from Spain. It's made with fresh, raw vegetables like tomatoes, cucumber,and bell peppers. Gazpacho is a great dish to make zero wastebecause it's made entirely with plant-based ingredients that are commonly found at farmers markets or in your own garden.",
@@ -33,6 +39,8 @@
     {
         "id":"4",
         "avatar":"WN",
+        "username":"user1",
+        "likes":"",
         "title":"GAZPACHO",
         "date":"September 14, 2016",
         "image":"./food-pic/Gazpacho.png",

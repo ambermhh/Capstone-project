@@ -1,11 +1,9 @@
-import {
-  ThemeProvider,
-  createTheme,
-} from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import "./allCSS/App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footers/Footer";
 import AppRoutes from "./components/Routes/AppRoutes";
+import React from "react";
 
 let theme = createTheme({
   palette: {
@@ -35,11 +33,11 @@ let theme = createTheme({
 function App() {
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <AppRoutes />
-        <Footer />
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <AppRoutes />
+          <Footer />
+        </ThemeProvider>
     </div>
   );
 }

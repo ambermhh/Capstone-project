@@ -14,6 +14,7 @@ const Title = styled("div")({
   "& span": {
     color: "#00e676",
   },
+  margin:'3rem'
 });
 
 export default function Home() {
@@ -176,6 +177,7 @@ export default function Home() {
                   fontSize: "4rem",
                   "@media (max-width:600px)": {
                     fontSize: "2rem",
+                    
                   },
                 }}
               >

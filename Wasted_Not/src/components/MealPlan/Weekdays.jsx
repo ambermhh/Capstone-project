@@ -42,53 +42,53 @@ function a11yProps(index) {
 }
 
 export default function Weekdays() {
+
+  const emptyMeals = [
+    { name: "Breakfast", recipe: "" },
+    { name: "Lunch", recipe: "" },
+    { name: "Dinner", recipe: "" },
+  ];
+
   const theme = useTheme();
-  const [value, setValue] = useState(0);
-  const [error, setError] = useState(null);
-  const [savedMeals, setSavedMeals] = useState([]);
+  const [value, setValue] = useState(undefined);
+  const [savedMeals, setSavedMeals] = useState(new Array(7).fill(emptyMeals));
   const userData = JSON.parse(localStorage.getItem("currentUser"));
   // console.log(userData);
   
   useEffect(() => {
-    console.log(userData);
-    axios.get`http://localhost:8080/api/mealPlanners/${userData._id}`
+
+    axios.get(`http://localhost:8080/api/mealPlanners/${userData._id}`)
       .then((response) => {
         console.log(response);
-        const mealPlanners = []
-        for (let [item, value] in response.data.data){
-           switch (item){
-            case "sunday": 
-            mealPlanners[0] = value; break;
-            case "monday": 
-            mealPlanners[1] = value; break;
-            case "tuesday": 
-            mealPlanners[2] = value; break;
-            case "wednesday": 
-            mealPlanners[3] = value; break;
-            case "thursday": 
-            mealPlanners[4] = value; break;
-            case "friday": 
-            mealPlanners[5] = value; break;
-            case "saturday": 
-            mealPlanners[6] = value; break;
-  
-           }
+        const userMealPlans = response.data.data
+        if (userMealPlans) {
+          const mealPlanners = []
+          for (let key in userMealPlans){
+            switch (key) {
+              case "sunday": 
+              mealPlanners[0] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "monday": 
+              mealPlanners[1] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "tuesday": 
+              mealPlanners[2] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "wednesday": 
+              mealPlanners[3] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "thursday": 
+              mealPlanners[4] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "friday": 
+              mealPlanners[5] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+              case "saturday": 
+              mealPlanners[6] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+            }
+          }
+          console.log(mealPlanners)
+          setSavedMeals(mealPlanners)
         }
-        setSavedMeals(mealPlanners)
+        handleChangeIndex(0)
+
       })
       .catch((error) => console.log(error));
   }, []);
-
-
-  if (error) {
-    return (
-      <Box sx={{ textAlign: "center"}}>
-        <Typography sx={{ fontSize: "50px" }}>
-          Error loading user data: {error}
-        </Typography>
-      </Box>
-    );
-  }
     
     if (!userData) {
       return (
@@ -99,8 +99,19 @@ export default function Weekdays() {
     }
     const handleChangeIndex = (index) => {
       setValue(index);
-      console.log(value);
+      console.log(index);
     };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };  
+  
+  const handleUpdateDayMeals = (dayIndex, dayMeals) => {
+    const mealsCopy = [...savedMeals]
+    mealsCopy[dayIndex] = dayMeals
+    console.log(mealsCopy)
+    setSavedMeals(mealsCopy)
+  }
   
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
@@ -120,9 +131,9 @@ export default function Weekdays() {
       >
         <Tabs
           value={value}
-          onChange={handleChangeIndex}
-          indicatorColor="primary"
-          textColor="primary"
+          onChange={handleChange}
+          indicatorColor="jump"
+          textColor="secondary"
           variant="fullWidth"
           aria-label="action tabs example"
         >
@@ -135,31 +146,32 @@ export default function Weekdays() {
           <Tab label="SATURDAY" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
+
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={value}
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={0} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={1} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={2} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={3} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={4} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={5} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
         <TabPanel value={value} index={6} dir={theme.direction}>
-          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
+          <MealPlanner dayIndex={6} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
         </TabPanel>
       </SwipeableViews>
     </div>

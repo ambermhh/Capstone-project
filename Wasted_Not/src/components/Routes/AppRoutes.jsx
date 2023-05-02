@@ -6,7 +6,7 @@ import Home from "../Home";
 import AboutUs from "../Footers/AboutUs";
 import TermOfService from "../Footers/TermOfService";
 import Privacy from "../Footers/Privacy";
-import Weekdays from "../mealplan/Weekdays";
+import Weekdays from "../MealPlan/Weekdays";
 import RecipePage from "../Recipes/RecipePage";
 import RecipePosts from "../Recipes/RecipePosts";
 

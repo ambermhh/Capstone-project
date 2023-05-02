@@ -60,7 +60,6 @@ export default function RecipesPost() {
                 subheader={recipe.date}
               />
               <CardMedia
-                Button
                 onClick={() => navigate("/recipePage")}
                 component="img"
                 height="194"

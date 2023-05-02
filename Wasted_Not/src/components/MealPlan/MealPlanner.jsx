@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -11,16 +11,9 @@ import {
 import { Add, Delete } from "@mui/icons-material";
 import SaveMealPlanner from "./SaveMealPlanner";
 
-function MealPlanner(props) {
-  const savedMeals =
-    props.saveMeal && props.saveMeal.length === 0
-      ? [
-          { name: "Breakfast", recipe: "" },
-          { name: "Lunch", recipe: "" },
-          { name: "Dinner", recipe: "" },
-        ]
-      : props.saveMeal;
-  const [meals, setMeals] = useState(savedMeals);
+function MealPlanner({dayIndex, savedMealPlans, updateDayMeals}) {
+
+  const [meals, setMeals] = useState(savedMealPlans[dayIndex])
 
   const handleMealChange = (index, inputname, inputvalue) => {
     setMeals((prevMeals) =>
@@ -40,7 +33,7 @@ function MealPlanner(props) {
   };
 
   return (
-    <div>
+    <div> {console.log(meals)}
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Grid container spacing={2}>
           {meals.map((meal, index) => (
@@ -92,7 +85,7 @@ function MealPlanner(props) {
         </Grid>
       </Container>
       <Box sx={{ float: "right" }}>
-        <SaveMealPlanner meals={meals} dayIndex={props.dayIndex} />
+        <SaveMealPlanner dayMeals={meals} updateDayMeals={updateDayMeals} dayIndex={dayIndex} />
       </Box>
     </div>
   );

@@ -1,6 +1,6 @@
 "use strict";
-const { parseInt } = require("dotenv");
 let Models = require("../models"); //matches index.js
+
 const getMealPlanner = (res) => {
   Models.MealPlanner.find({})
     .then((data) => res.send({ result: 200, data: data }))
@@ -9,9 +9,11 @@ const getMealPlanner = (res) => {
       res.send({ result: 500, error: err.message });
     });
 };
+
 const getUserMealPlanner = (req, res) => {
   const user = req.params.id;
-
+  console.log('getting meal plans for user '+user);
+  
   Models.MealPlanner.findOne({ UserId: user })
     .then((data) => {
       console.log(data);
@@ -26,11 +28,13 @@ const getUserMealPlanner = (req, res) => {
       res.send({ result: 500, error: err.message });
     });
 };
+
 const createMealPlanner = (req, res) => {
   const user = req.params.userId;
   const data = req.body;
-  const dayofweek = parseInt(req.params.index);
+  const dayofweek = Number(req.params.index);
   let dayOfWeekName = "";
+
   switch (dayofweek) {
     case 0:
       dayOfWeekName = "sunday";
@@ -58,13 +62,18 @@ const createMealPlanner = (req, res) => {
   //creates a new user using JSON data POSTed in request body
   console.log(data);
   console.log(dayOfWeekName, dayofweek);
+  console.log(user);
 
   Models.MealPlanner.findOneAndUpdate(
     { UserId: user },
     { [dayOfWeekName]: data, UserId: user },
     { upsert: true }
   )
-    .then((data) => res.send({ result: 200, data: data }))
+    .then((data) => {
+      console.log('inserted meal plan for user '+user);
+      console.log(data);
+      res.send({ result: 200, data: data })
+    })
     .catch((err) => {
       console.log(err);
       res.send({ result: 500, error: err.message });
@@ -82,6 +91,7 @@ const deleteMealPlanner = (req, res) => {
       res.send({ result: 500, error: err.message });
     });
 };
+
 module.exports = {
   getMealPlanner,
   createMealPlanner,

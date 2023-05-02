@@ -10,10 +10,11 @@ export default function SaveMealPlanner(props) {
     axios
       .post(
         `http://localhost:8080/api/mealPlanners/create/${userData._id}/${props.dayIndex}`,
-        props.meals
+        props.dayMeals
       )
       .then((response) => {
         console.log(response);
+        props.updateDayMeals(props.dayIndex, props.dayMeals)
       })
       .catch((error) => {
         console.log(error);

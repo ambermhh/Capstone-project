@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import RecipesPost from "./Recipes/RecipePosts";
-import Weekdays from "./mealplan/Weekdays";
+import Weekdays from "./MealPlan/Weekdays";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +54,7 @@ export default function ProfileTabs() {
           value={value}
           onChange={handleChange}
           variant="fullWidth"
-          textColor="black"
+          textColor="primary"
           sx={{ margin:'1rem'}}
         >
             <Tab sx={{fontSize:"18px"}} label="POSTS" {...a11yProps(0)} />

@@ -12,18 +12,24 @@ import { Add, Delete } from "@mui/icons-material";
 import SaveMealPlanner from "./SaveMealPlanner";
 
 function MealPlanner(props) {
-  const [meals, setMeals] = useState([
-    { name: "Breakfast", recipe: "" },
-    { name: "Lunch", recipe: "" },
-    { name: "Dinner", recipe: "" },
-  ]);
-  
-  
-  const handleMealChange = (index, inputname, inputvalue) => {    
-    setMeals((prevMeals) => prevMeals.map((meal, i) => i !== index  ? meal : {...meal,[inputname]:inputvalue}));
-  console.log(index, inputname, inputvalue)
-  }    
- 
+  const savedMeals =
+    props.saveMeal && props.saveMeal.length === 0
+      ? [
+          { name: "Breakfast", recipe: "" },
+          { name: "Lunch", recipe: "" },
+          { name: "Dinner", recipe: "" },
+        ]
+      : props.saveMeal;
+  const [meals, setMeals] = useState(savedMeals);
+
+  const handleMealChange = (index, inputname, inputvalue) => {
+    setMeals((prevMeals) =>
+      prevMeals.map((meal, i) =>
+        i !== index ? meal : { ...meal, [inputname]: inputvalue }
+      )
+    );
+    console.log(index, inputname, inputvalue);
+  };
 
   const handleAddMeal = () => {
     setMeals((prevMeals) => [...prevMeals, { name: "", recipe: "" }]);
@@ -86,7 +92,7 @@ function MealPlanner(props) {
         </Grid>
       </Container>
       <Box sx={{ float: "right" }}>
-        <SaveMealPlanner meals={meals} dayIndex={props.dayIndex}/>
+        <SaveMealPlanner meals={meals} dayIndex={props.dayIndex} />
       </Box>
     </div>
   );

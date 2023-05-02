@@ -9,22 +9,23 @@ const getMealPlanner = (res) => {
       res.send({ result: 500, error: err.message });
     });
 };
-// const getUserMealPlanner = (req, res) => {
-//   const user = req.params.userId;
+const getUserMealPlanner = (req, res) => {
+  const user = req.params.id;
 
-//   Models.MealPlanner.findOne({ UserId: user })
-//     .then((data) => {
-//       if (data) {
-//         res.send({ result: 200, data: data.MealPlanner });
-//       } else {
-//         res.send({ result: 404, error: "Data not found" });
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.send({ result: 500, error: err.message });
-//     });
-// };
+  Models.MealPlanner.findOne({ UserId: user })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        res.send({ result: 200, data: data });
+      } else {
+        res.send({ result: 404, error: "Data not found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
 const createMealPlanner = (req, res) => {
   const user = req.params.userId;
   const data = req.body;
@@ -85,5 +86,5 @@ module.exports = {
   getMealPlanner,
   createMealPlanner,
   deleteMealPlanner,
-  // getUserMealPlanner,
+  getUserMealPlanner,
 };

@@ -45,12 +45,44 @@ export default function Weekdays() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [error, setError] = useState(null);
+  const [savedMeals, setSavedMeals] = useState([]);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(userData);
+  // console.log(userData);
+  
+  useEffect(() => {
+    console.log(userData);
+    axios.get`http://localhost:8080/api/mealPlanners/${userData._id}`
+      .then((response) => {
+        console.log(response);
+        const mealPlanners = []
+        for (let [item, value] in response.data.data){
+           switch (item){
+            case "sunday": 
+            mealPlanners[0] = value; break;
+            case "monday": 
+            mealPlanners[1] = value; break;
+            case "tuesday": 
+            mealPlanners[2] = value; break;
+            case "wednesday": 
+            mealPlanners[3] = value; break;
+            case "thursday": 
+            mealPlanners[4] = value; break;
+            case "friday": 
+            mealPlanners[5] = value; break;
+            case "saturday": 
+            mealPlanners[6] = value; break;
+  
+           }
+        }
+        setSavedMeals(mealPlanners)
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
 
   if (error) {
     return (
-      <Box sx={{ textAlign: "center", padding: 20, margin: 38 }}>
+      <Box sx={{ textAlign: "center"}}>
         <Typography sx={{ fontSize: "50px" }}>
           Error loading user data: {error}
         </Typography>
@@ -60,8 +92,8 @@ export default function Weekdays() {
     
     if (!userData) {
       return (
-        <Box sx={{ textAlign: "center", padding: 20, margin: 38 }}>
-          <Typography sx={{ fontSize: "50px" }}>"To access the meal planner feature, you need to sign up or log in first. Don't worry, it's quick and easy! Once you're signed in, you'll be able to plan your meals and save your favorite recipes."</Typography>
+        <Box sx={{ textAlign: "center", padding:"10px", margin:"20px" }}>
+          <Typography sx={{ fontSize: "30px" }}>To access the meal planner feature, you need to sign up or log in first. Don't worry, it's quick and easy! Once you're signed in, you'll be able to plan your meals and save your favorite recipes.</Typography>
         </Box>
       );
     }
@@ -74,16 +106,7 @@ export default function Weekdays() {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
   };
-  // const userData = JSON.parse(localStorage.getItem("currentUser"));
 
-  // useEffect(() => {
-  //   console.log(userData);
-  //   axios.get`http://localhost:8080/api/users/${userData._id}/mealPlanners/`
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
   return (
     <div>
       <Typography sx={{ padding: 3, textAlign: "center", fontSize: "50px" }}>
@@ -118,25 +141,25 @@ export default function Weekdays() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
         <TabPanel value={value} index={6} dir={theme.direction}>
-          <MealPlanner dayIndex={value} />
+          <MealPlanner dayIndex={value} saveMeal={savedMeals[value]}/>
         </TabPanel>
       </SwipeableViews>
     </div>

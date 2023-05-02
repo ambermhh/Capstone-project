@@ -6,11 +6,8 @@ import Subscription from "./Subscription";
 
 export default function Footer() {
   return (
-    <Box >
-      <Box sx={{display:'flex'}}>
-        <Subscription />
+    <Box  >
         <FooterButtons />
-      </Box>
       <HashTag />
     </Box>
   );

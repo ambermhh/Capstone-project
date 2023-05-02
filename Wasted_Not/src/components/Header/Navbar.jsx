@@ -76,7 +76,7 @@ const Navbar = () => {
           sx={{
             "&:hover": { textShadow: "2px 1px #00e676" },
           }}
-          onClick={() => navigate("/recipePosts")}
+          onClick={() => navigate("/recipePage")}
         >
           <ListItemText>RECIPES</ListItemText>
         </ListItem>
@@ -100,19 +100,15 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="sticky" className="AppBar">
-        <Toolbar>
+        <Toolbar width={"100%"}>
           <MenuButton edge="start" aria-label="menu" onClick={toggleDrawer}>
             <MenuIcon />
           </MenuButton>
-          <NavLink
-            to="/"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              padding: "3px",
-            }}
-          >
-            <Title variant="h6">
+          <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>
+            {list()}
+          </Drawer>
+          <div onClick={() => navigate("/")} style={{position:'absolute', left:"26rem"}}>
+            <Title variant="h4" >
               WASTED NOT
               <img
                 style={{
@@ -124,9 +120,9 @@ const Navbar = () => {
                 src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png"
               />
             </Title>
-          </NavLink>
-          <Search />
-          <Button onClick={handleLoginForm} color="jump">
+          </div>
+          <Search id="search" />
+          <Button onClick={handleLoginForm} color="jump" sx={{position:'absolute', right:60}}>
             Login
           </Button>
           <Login
@@ -141,9 +137,6 @@ const Navbar = () => {
           />
         </Toolbar>
       </AppBar>
-      <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>
-        {list()}
-      </Drawer>
     </>
   );
 };

@@ -5,8 +5,6 @@ export default function HashTag() {
   return (
     <Box
     sx={{
-      position:'absolute',
-      bottom:'0',
       width: "100%",
       backgroundColor: "#f5f5f5",
       padding: "4px",

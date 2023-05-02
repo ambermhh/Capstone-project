@@ -6,8 +6,8 @@ import Subscription from "./Subscription";
 
 export default function Footer() {
   return (
-    <Box  >
-        <FooterButtons />
+    <Box>
+      <FooterButtons />
       <HashTag />
     </Box>
   );

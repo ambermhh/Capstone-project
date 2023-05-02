@@ -29,6 +29,11 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setUsername("");
       toggleSignUpForm(false);
       navigate("/profile");
     } catch (error) {
@@ -101,7 +106,13 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
               required
             />
             <Box sx={{ display: "flex" }}>
-              <Button onClick={() => toggleSignUpForm(false)}>Cancel</Button>
+              <Button
+                variant="contained"
+                sx={{ textAlign: "center", mt: 2, border: "2px solid black" }}
+                onClick={() => toggleSignUpForm(false)}
+              >
+                Cancel
+              </Button>
               <Button
                 type="submit"
                 variant="contained"

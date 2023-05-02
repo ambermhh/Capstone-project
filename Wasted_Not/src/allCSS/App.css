@@ -1,14 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  font-family: "Righteous", cursive;
-  background-color: #ffff;
-  padding-bottom: 80px;
-}
+
 .MuiSvgIcon-root {
   color: #000000;
 
 }
+.App{
+  height: 100%;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+

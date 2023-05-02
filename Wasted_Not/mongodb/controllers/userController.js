@@ -152,11 +152,12 @@ const addProfileImage = (req, res) => {
       //use same uploaded path in filename
       console.log(req.file);
       const userUpdates = {
-        profilePhoto: process.env.IMAGE_PATH + req.file.originalname,
+        profilePhoto: process.env.IMAGE_PATH,
+        //  + req.file.originalname,
         profilePhotoTitle: req.body.imageTitle,
       };
       //save path to uploaded file in DB
-      Models.User.update(userUpdates, { where: { id: req.body.userId } })
+      Models.User.findOneAndUpdate(userUpdates, { id: req.body.userId } )
         .then(
           (response) =>
             res.status(200).json({

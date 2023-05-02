@@ -36,6 +36,8 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
       const { token } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("currentUser", JSON.stringify(response.data.data));
+      setEmail("");
+      setPassword("");
       closeForm();
       navigate("/profile");
     } catch (error) {
@@ -106,7 +108,7 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
                   required
                 />
               </Box>
-
+              <Box sx={{display:'flex', justifyContent:'space-evenly'}}>
               <Button
                 type="submit"
                 variant="contained"
@@ -119,14 +121,13 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
                 onClick={handleSignUpForm}
                 variant="contained"
                 sx={{
-                  alignItem: "center",
                   textAlign: "center",
                   mt: 2,
                   border: "2px solid black",
                 }}
               >
                 SIGN UP
-              </Button>
+              </Button></Box>
             </DialogContent>
           </Box>
         </Box>

@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Box, TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import SearchResults from "./SeachResult";
 
-const Search = () => {
+const Search = (props) => {
   const [query, setQuery] = useState("");
   const [includeIngredients, setIncludeIngredients] = useState("");
   const [cuisine, setcuisine] = useState("");
   const [diet, setDiet] = useState("");
   const [titleMatch, setTitleMatch] = useState("");
   const [results, setResults] = useState([]);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -41,7 +41,8 @@ const Search = () => {
       const recipesResponse = await Promise.all(recipePromises);
       const recipesData = recipesResponse.map((response) => response.data);
       console.log(recipesData);
-      setResults(recipesData)
+      setResults(recipesData);
+      
       setQuery("");
     } catch (error) {
       console.error(error);
@@ -49,7 +50,7 @@ const Search = () => {
   };
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: "flex", position:'absolute', right:130 }}>
         <TextField
           id="search"
           label="Search"

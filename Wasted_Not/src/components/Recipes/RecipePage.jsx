@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Grid, Typography, Divider, Chip, styled } from "@mui/material";
-import axios from "axios";
 
 const RecipePageContainer = styled(Grid)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -25,25 +24,21 @@ const RecipeChip = styled(Chip)(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
-function RecipePage(props) {
-  const [recipe, setRecipe] = useState({});
-  useEffect(() => {
-    async function fetchRecipe() {
-      try {
-        const response = await axios.get(
-          `https://api.spoonacular.com/recipes/${props.params.id}/information?apiKey=3d07bc950c674ff29ba53968dc2d44e5`
-        );
-        setRecipe(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchRecipe();
-  }, [props.match]);
+function RecipePage(  ) {
+
   
-  return (
-    <RecipePageContainer container spacing={4}>
-      <Grid item xs={12}>
+
+
+
+return (
+  
+  <RecipePageContainer container spacing={4}>
+
+   
+      <Grid item xs={12} sm={6}>
+        <RecipeImage src={recipe.image} alt={recipe.title} />
+      </Grid>
+      <Grid item xs={12} sm={6}>
         <RecipeTitle variant="h3">{recipe.title}</RecipeTitle>
         <RecipeSubtitle variant="subtitle1">
           Servings: {recipe.servings}
@@ -74,10 +69,7 @@ function RecipePage(props) {
             ))}
         </RecipeSubtitle>
       </Grid>
-      <Grid item xs={12} sm={6}>
-        <RecipeImage src={recipe.image} alt={recipe.title} />
-      </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12}>
         <RecipeTitle variant="h4">Ingredients:</RecipeTitle>
         <ul>
           {recipe.extendedIngredients &&
@@ -96,6 +88,7 @@ function RecipePage(props) {
             )}
         </ol>
       </Grid>
+      
     </RecipePageContainer>
   );
 }

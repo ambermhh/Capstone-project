@@ -13,12 +13,10 @@ To get the frontend, backend, and database to run on your system, please follow 
 Clone the code from GitHub
 Install the necessary dependencies by running npm install in both the frontend and backend directories
 Create a .env file in the backend directory with the following environment variables:
-MONGODB_URI with the URI to your MongoDB database
+DB_URI with the URI to your MongoDB database
 JWT_SECRET with a secret key for JSON Web Tokens
-In the frontend directory, create a .env file with the following environment variable:
-REACT_APP_API_URL with the URL to your backend API
 Start the backend server by running npm start in the backend directory
-Start the frontend server by running npm start in the frontend directory
+Start the frontend server by running npm run dev in the frontend directory
 Open your browser and go to http://localhost:5173(or the port specified in your environment variables)
 If everything was successful, you should see the homepage of the platform.
 Installation Instructions Authenticity

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import {
   styled,
   Grid,
@@ -15,10 +15,9 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import recipes from "./recipeCard.json";
 import { useNavigate } from "react-router-dom";
 import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
-import RecipePage from "./RecipePage";
+import axios from "axios";
 
 const Cards = styled(Card)({
   padding: 50,
@@ -29,10 +28,23 @@ export default function RecipesPost() {
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(0);
   const [like, setLike] = React.useState([]);
+  const [recipes, setRecipes] = React.useState([]);
+  const userData = JSON.parse(localStorage.getItem("currentUser"));
+ console.log(userData);
 
-  const handleLike = () => {
 
-  };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/recipes/${userData._id}`)
+      .then((response) => {
+        console.log(response);
+      
+        setRecipes(response.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleLike = () => {};
 
   return (
     <Cards>
@@ -42,9 +54,7 @@ export default function RecipesPost() {
             <Card sx={{ maxWidth: 345 }}>
               <CardHeader
                 avatar={
-                  <Avatar color="fun" aria-label="recipe">
-                    {recipe.avatar}
-                  </Avatar>
+                  <Avatar color="fun" aria-label="recipe" src={"http://localhost:8080" + userData.profile_picture} />
                 }
                 action={
                   <IconButton
@@ -60,7 +70,6 @@ export default function RecipesPost() {
                 subheader={recipe.date}
               />
               <CardMedia
-                onClick={() => navigate("/recipePage")}
                 component="img"
                 height="194"
                 image={recipe.image}
@@ -95,7 +104,6 @@ export default function RecipesPost() {
                 </IconButton>
               </CardActions>
             </Card>
-     
           </Grid>
         ))}
       </Grid>

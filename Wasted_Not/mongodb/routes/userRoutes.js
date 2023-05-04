@@ -2,6 +2,7 @@ let express = require("express");
 let router = express.Router();
 let Controllers = require("../controllers"); //index.js
 const auth = require("../middleware/auth");
+const uploadFile = require("../middleware/uploads");
 
 
 router.get('/', auth, (req, res) => {
@@ -29,7 +30,7 @@ router.delete('/:id', (req, res) => {
   Controllers.userController.deleteUser(req, res)
 })
 
-router.post('/image', (req, res) => {
+router.post('/image/:id', uploadFile,(req, res) => {
   Controllers.userController.addProfileImage(req, res)
 })
 

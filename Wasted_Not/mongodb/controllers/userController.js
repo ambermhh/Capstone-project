@@ -133,42 +133,23 @@ const deleteUser = (req, res) => {
 };
 
 const addProfileImage = (req, res) => {
-  //first set up the path and filename the image will use - has to follow this format
-  const storage = multer.diskStorage({
-    destination: "public/" + process.env.IMAGE_PATH, // store images in public folder of backend, in defined images directory
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-  });
-
-  //get the image upload function. could move this and storage object to middleware or helper file and export/import
-  const upload = multer({ storage: storage }).single("file"); // change single to array for multiple
-
-  //upload the image based on the info in the request
-  upload(req, res, (err) => {
-    if (err) {
-      res.status(500).json({ result: err.message });
-    } else {
-      //use same uploaded path in filename
       console.log(req.file);
       const userUpdates = {
-        profilePhoto: process.env.IMAGE_PATH,
+        profile_picture: "/images/" + req.file.filename,
         //  + req.file.originalname,
-        profilePhotoTitle: req.body.imageTitle,
       };
       //save path to uploaded file in DB
-      Models.User.findOneAndUpdate(userUpdates, { id: req.body.userId } )
+      Models.User.findOneAndUpdate({ _id: req.params.id },userUpdates)
         .then(
-          (response) =>
+          (response) => {
+            console.log(response);
             res.status(200).json({
               result: "Image uploaded successfully",
               data: userUpdates,
             }) // send updated info back in response
-        )
+          })
         .catch((err) => res.status(500).json({ result: err.message }));
     }
-  });
-};
 
 module.exports = {
   getUsers,

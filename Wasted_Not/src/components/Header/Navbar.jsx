@@ -76,7 +76,7 @@ const Navbar = () => {
           sx={{
             "&:hover": { textShadow: "2px 1px #00e676" },
           }}
-          onClick={() => navigate("/recipePage")}
+          onClick={() => navigate("/recipeFeed")}
         >
           <ListItemText>RECIPES</ListItemText>
         </ListItem>
@@ -107,7 +107,7 @@ const Navbar = () => {
           <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>
             {list()}
           </Drawer>
-          <div onClick={() => navigate("/")} style={{position:'absolute', left:"26rem"}}>
+          <div onClick={() => navigate("/")} style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
             <Title variant="h4" >
               WASTED NOT
               <img

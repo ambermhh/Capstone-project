@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Box, TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { useNavigate } from "react-router-dom";
+import { RecipeSearchContext } from "../Context/RecipeSearchContext";
 const Search = (props) => {
-  const [query, setQuery] = useState("");
+  const { search, setSearch } = useContext(RecipeSearchContext);
   const [includeIngredients, setIncludeIngredients] = useState("");
   const [cuisine, setcuisine] = useState("");
   const [diet, setDiet] = useState("");
   const [titleMatch, setTitleMatch] = useState("");
-  const [results, setResults] = useState([]);
-
+  const { results, setResults } = useContext(RecipeSearchContext);
+  const navigate = useNavigate();
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -19,7 +20,7 @@ const Search = (props) => {
         {
           params: {
             apiKey: "3d07bc950c674ff29ba53968dc2d44e5",
-            query: query,
+            query: search,
             cuisine: cuisine,
             includeIngredients: includeIngredients,
             instructionsRequired: true,
@@ -42,29 +43,28 @@ const Search = (props) => {
       const recipesData = recipesResponse.map((response) => response.data);
       console.log(recipesData);
       setResults(recipesData);
-      
-      setQuery("");
+      navigate("/recipePage");
+      setSearch("");
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <>
-      <Box sx={{ display: "flex", position:'absolute', right:130 }}>
+      <Box sx={{ display: "flex", position: "absolute", right: 130 }}>
         <TextField
           id="search"
           label="Search"
           variant="outlined"
           size="small"
           type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <IconButton onClick={handleSearch}>
           <SearchIcon />
         </IconButton>
       </Box>
-      
     </>
   );
 };

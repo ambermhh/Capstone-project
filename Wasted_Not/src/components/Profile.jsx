@@ -1,21 +1,28 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
-import Logout from "../Logout";
 import ProfileTabs from "./ProfileTabs";
 import axios from "axios";
-import SignUpForm from "./Header/SignUpForm";
 import { useNavigate } from "react-router-dom";
+import SignUpForm from "./Header/SignUpForm";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import Logout from "./Logout";
+import PostForm from "./PostForm";
 
-const Profile = () => {
+const Profile = ({open, onClose}) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
-  const [profilePicture, setProfilePicture] = useState(null);
-  console.log(userData);
+  const [profilePicture, setProfilePicture] = useState({ preview: '', data: '' });
+  const [signUpForm, setSignUpForm] = useState(false);
+  const [recipeForm, setRecipeForm] = useState(false);
+
+  const handleSignUpForm = () => {
+    setSignUpForm(true);
+  };
 
   if (error) {
     return (
-      <Box sx={{ textAlign: "center", padding: 20, margin: 38 }}>
+      <Box id="profile-error">
         <Typography sx={{ fontSize: "50px" }}>
           Error loading user data: {error}
         </Typography>
@@ -25,8 +32,22 @@ const Profile = () => {
 
   if (!userData) {
     return (
-      <Box sx={{ textAlign: "center", padding: 20, margin: 38 }}>
-        <Typography sx={{ fontSize: "50px" }}>Please Login or  <Button variant="contained" >Sign Up</Button></Typography>
+      <Box id="profile-login-text">
+        <Typography sx={{ fontSize: "50px" }}>
+          Please Login or{" "}
+          <Button
+            onClick={handleSignUpForm}
+            variant="contained"
+            sx={{
+              textAlign: "center",
+              mt: 2,
+              border: "2px solid black",
+            }}
+          >
+            SIGN UP
+          </Button>
+        </Typography>
+        <SignUpForm signUpForm={signUpForm} toggleSignUpForm={setSignUpForm} />
       </Box>
     );
   }
@@ -36,27 +57,21 @@ const Profile = () => {
   };
 
   const handleProfilePictureChange = (event) => {
+    const userData = JSON.parse(localStorage.getItem("currentUser"));
+
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    axios.post`http://localhost:8080/api/users/image`
+    axios.post(`http://localhost:8080/api/users/image/${userData._id}`, formData)
       .then((response) => {
         console.log(response);
         const updatedUser = {
           ...userData,
-          profile_picture: response.data.url,
+          profile_picture: response.data.data.profile_picture,
         };
-        User.findOneAndUpdate(
-          { _id: updatedUser._id },
-          updatedUser,
-          { new: true },
-          (err, savedUser) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("User saved to database");
-              setProfilePicture(URL.createObjectURL(file));          }
-        });
+        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+        console.log(updatedUser);
+        setProfilePicture( response.data.data.profile_picture)
       })
       .catch((error) => console.log(error));
   };
@@ -74,7 +89,7 @@ const Profile = () => {
         <Grid item>
           <Avatar
             alt="WN"
-            src={profilePicture || userData.profile_picture}
+            src={"http://localhost:8080" + (userData.profile_picture)}
             onClick={handleAvatarClick}
             sx={{ width: 140, height: 140 }}
           >
@@ -104,9 +119,7 @@ const Profile = () => {
               display: "flex",
             }}
           >
-            <Typography variant="subtitle1">
-              {userData.numPosts} posts
-            </Typography>
+    
             <Typography variant="subtitle1">
               {userData.numFollowers} followers
             </Typography>
@@ -115,9 +128,15 @@ const Profile = () => {
             </Typography>
           </Box>
           <Typography sx={{ textAlign: "start", pt: 3 }} variant="body1">
-            {userData.user_bio}BIO
+            {userData.user_bio}
           </Typography>
         </Grid>
+      
+          <Button onClick={() => setRecipeForm(true)}>
+            <PostForm open={recipeForm} onClose={() => setRecipeForm(false)} />
+            <AddCircleOutlinedIcon id="post-button" />
+          </Button>
+       
       </Grid>
       <Divider />
       <ProfileTabs />

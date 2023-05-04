@@ -4,7 +4,7 @@ import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footers/Footer";
 import AppRoutes from "./components/Routes/AppRoutes";
 import React from "react";
-
+import RecipeSearchProvider from "./components/Context/RecipeSearchContext";
 let theme = createTheme({
   palette: {
     primary: {
@@ -33,11 +33,13 @@ let theme = createTheme({
 function App() {
   return (
     <div className="App">
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <RecipeSearchProvider>
           <Navbar />
           <AppRoutes />
           <Footer />
-        </ThemeProvider>
+        </RecipeSearchProvider>
+      </ThemeProvider>
     </div>
   );
 }

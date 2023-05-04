@@ -12,3 +12,45 @@
   overflow-x: hidden;
 }
 
+#profile-login-text  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 78%;
+}
+
+#profile-error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 78%;
+
+}
+
+#meal-plan-text {
+ 
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 78%;
+
+}
+
+#meal-plan-error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 78%;
+
+}
+
+#post-button {
+  color:green;
+  font-size: 70px;
+}
+

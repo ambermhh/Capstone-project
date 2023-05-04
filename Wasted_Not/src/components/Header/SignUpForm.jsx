@@ -7,7 +7,6 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +18,7 @@ const SignUpForm = ({ signUpForm, toggleSignUpForm }) => {
   const [username, setUsername] = useState("");
 
   const navigate = useNavigate();
-
+  console.log("test")
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

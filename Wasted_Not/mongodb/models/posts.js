@@ -3,6 +3,7 @@ const { number } = require("prop-types");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
+  title: {type: "string", required: true},
   description: { type: String, required: true },
   image: { type: String, trim: true, required: true },
   liked: { type: Number, default: 0 },

@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import MealPlanner from "./MealPlanner";
 import axios from "axios";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -42,7 +41,6 @@ function a11yProps(index) {
 }
 
 export default function Weekdays() {
-
   const emptyMeals = [
     { name: "Breakfast", recipe: "" },
     { name: "Lunch", recipe: "" },
@@ -53,66 +51,111 @@ export default function Weekdays() {
   const [value, setValue] = useState(undefined);
   const [savedMeals, setSavedMeals] = useState(new Array(7).fill(emptyMeals));
   const userData = JSON.parse(localStorage.getItem("currentUser"));
-  // console.log(userData);
-  
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-
-    axios.get(`http://localhost:8080/api/mealPlanners/${userData._id}`)
-      .then((response) => {
-        console.log(response);
-        const userMealPlans = response.data.data
-        if (userMealPlans) {
-          const mealPlanners = []
-          for (let key in userMealPlans){
-            switch (key) {
-              case "sunday": 
-              mealPlanners[0] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "monday": 
-              mealPlanners[1] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "tuesday": 
-              mealPlanners[2] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "wednesday": 
-              mealPlanners[3] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "thursday": 
-              mealPlanners[4] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "friday": 
-              mealPlanners[5] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
-              case "saturday": 
-              mealPlanners[6] = userMealPlans[key].length > 0 ? userMealPlans[key] : emptyMeals; break;
+    console.log(userData);
+    if (userData) {
+      axios
+        .get(`http://localhost:8080/api/mealPlanners/${userData._id}`)
+        .then((response) => {
+          console.log(response);
+          const userMealPlans = response.data.data;
+          if (userMealPlans) {
+            const mealPlanners = [];
+            for (let key in userMealPlans) {
+              switch (key) {
+                case "sunday":
+                  mealPlanners[0] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "monday":
+                  mealPlanners[1] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "tuesday":
+                  mealPlanners[2] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "wednesday":
+                  mealPlanners[3] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "thursday":
+                  mealPlanners[4] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "friday":
+                  mealPlanners[5] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+                case "saturday":
+                  mealPlanners[6] =
+                    userMealPlans[key].length > 0
+                      ? userMealPlans[key]
+                      : emptyMeals;
+                  break;
+              }
             }
+            console.log(mealPlanners);
+            setSavedMeals(mealPlanners);
           }
-          console.log(mealPlanners)
-          setSavedMeals(mealPlanners)
-        }
-        handleChangeIndex(0)
-
-      })
-      .catch((error) => console.log(error));
-  }, []);
-    
-    if (!userData) {
-      return (
-        <Box sx={{ textAlign: "center", padding:"10px", margin:"20px" }}>
-          <Typography sx={{ fontSize: "30px" }}>To access the meal planner feature, you need to sign up or log in first. Don't worry, it's quick and easy! Once you're signed in, you'll be able to plan your meals and save your favorite recipes.</Typography>
-        </Box>
-      );
+          handleChangeIndex(0);
+        })
+        .catch((error) => console.log(error));
     }
-    const handleChangeIndex = (index) => {
-      setValue(index);
-      console.log(index);
-    };
+  }, []);
+
+  if (error) {
+    return (
+      <Box  id="meal-plan-error">
+        <Typography sx={{ fontSize: "50px" }}>
+          Error loading user data: {error}
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (!userData) {
+    return (
+      <Box id="meal-plan-text">
+        <Typography sx={{ fontSize: "30px" }}>
+          To access the meal planner feature, you need to sign up or log in
+          first. <br/>Don't worry, it's quick and easy!<br/> Once you're signed in, you'll
+          be able to plan your meals and save your favorite recipes.
+        </Typography>
+      </Box>
+    );
+  }
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+    console.log(index);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };  
-  
+  };
+
   const handleUpdateDayMeals = (dayIndex, dayMeals) => {
-    const mealsCopy = [...savedMeals]
-    mealsCopy[dayIndex] = dayMeals
-    console.log(mealsCopy)
-    setSavedMeals(mealsCopy)
-  }
-  
+    const mealsCopy = [...savedMeals];
+    mealsCopy[dayIndex] = dayMeals;
+    console.log(mealsCopy);
+    setSavedMeals(mealsCopy);
+  };
+
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
@@ -153,25 +196,53 @@ export default function Weekdays() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MealPlanner dayIndex={0} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={0}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <MealPlanner dayIndex={1} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={1}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <MealPlanner dayIndex={2} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={2}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <MealPlanner dayIndex={3} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={3}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <MealPlanner dayIndex={4} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={4}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={5} dir={theme.direction}>
-          <MealPlanner dayIndex={5} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={5}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
         <TabPanel value={value} index={6} dir={theme.direction}>
-          <MealPlanner dayIndex={6} savedMealPlans={savedMeals} updateDayMeals={handleUpdateDayMeals}/>
+          <MealPlanner
+            dayIndex={6}
+            savedMealPlans={savedMeals}
+            updateDayMeals={handleUpdateDayMeals}
+          />
         </TabPanel>
       </SwipeableViews>
     </div>

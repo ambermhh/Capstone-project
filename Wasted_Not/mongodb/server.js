@@ -27,10 +27,7 @@ app.use('/api/mealPlanners', mealPlannerRoutes)
 let subscriptionRoutes = require('./routes/subscriptionRoutes')
 app.use('/api/subscriptions', subscriptionRoutes)
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my MongoDB application." });
-});
-
+app.use("/", express.static("public"));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

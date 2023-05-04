@@ -1,8 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-const Models = require("../models"); //matches index.js
+let Models = require("../models"); //matches index.js
 
 const getUsers = (res) => {
   Models.User.findAll({})

@@ -13,7 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
+import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
@@ -29,31 +29,41 @@ export default function RecipeFeed() {
   const [expanded, setExpanded] = React.useState(0);
   const [like, setLike] = React.useState([]);
   const [recipes, setRecipes] = React.useState([]);
- 
-
+  const [users, setUsers] = React.useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/recipes/`)
+      .get("http://localhost:8080/api/recipes")
       .then((response) => {
-        console.log(response);
-      
         setRecipes(response.data.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
- const handleLike = () => {};
+  const handleLike = (recipeId) => {
+    setLike((prevLikes) =>
+      prevLikes.includes(recipeId)
+        ? prevLikes.filter((id) => id !== recipeId)
+        : [...prevLikes, recipeId]
+    );
+  };
 
   return (
     <Cards>
-      <Grid container sx={{ margin: "2em" }}>
+      <Grid container gap={3}>
         {recipes.map((recipe) => (
-          <Grid item xs={3} key={recipe.id}>
-            <Card sx={{ maxWidth: 345 }}>
+          <Grid item  key={recipe.id}>
+            <Card sx={{ maxWidth: 345 ,border:'2px solid black', boxShadow:'5px 5px 10px green ', }}>
               <CardHeader
                 avatar={
-                  <Avatar color="fun" aria-label="recipe"  />
+                  <Avatar
+                    color="fun"
+                    aria-label="recipe"
+                    src={"http://localhost:8080" + recipe.profile_picture}
+                    alt={recipe.username}
+                  />
                 }
                 action={
                   <IconButton
@@ -65,30 +75,29 @@ export default function RecipeFeed() {
                     <BookmarkAdd />
                   </IconButton>
                 }
-                title={recipe.title}
-                subheader={recipe.date}
+                title={recipe.username}
+                subheader={recipe.title}
               />
               <CardMedia
                 component="img"
                 height="194"
-                image={recipe.image}
+                src={"http://localhost:8080" + recipe.image}
                 alt={recipe.title}
               />
               <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {expanded === recipe.id
-                    ? recipe.description
-                    : recipe.description.split(" ").slice(0, 20).join(" ")}
-                  {recipe.description.split(" ").length > 20 && (
-                    <Button
-                      size="small"
-                      sx={{ ml: 1 }}
-                      onClick={() => setExpanded(recipe.id)}
-                    >
-                      {expanded === recipe.id ? "Read less" : "Read more"}
-                    </Button>
-                  )}
-                </Typography>
+                {expanded === recipe.id
+                  ? recipe.description
+                  : recipe.description.split(" ").slice(0, 20).join(" ")}
+                {recipe.description.split(" ").length > 20 && (
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{ ml: 1 }}
+                    onClick={() => setExpanded(recipe.id)}
+                  >
+                    {expanded === recipe.id ? "Read less" : "Read more"}
+                  </Button>
+                )}
               </CardContent>
               <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites" onClick={handleLike}>
@@ -99,8 +108,9 @@ export default function RecipeFeed() {
                   )}
                 </IconButton>
                 <IconButton aria-label="share">
-                  <ShareIcon />
+                  <AddCommentOutlinedIcon />
                 </IconButton>
+                {recipe.createdAt}
               </CardActions>
             </Card>
           </Grid>

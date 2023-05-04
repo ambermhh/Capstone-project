@@ -107,7 +107,7 @@ const Navbar = () => {
           <Drawer anchor={"top"} open={drawerOpen} onClose={toggleDrawer}>
             {list()}
           </Drawer>
-          <div onClick={() => navigate("/")} style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div onClick={() => navigate("/")} style={{display:'flex', alignItems:'center', justifyContent:'center', cursor:"pointer"}}>
             <Title variant="h4" >
               WASTED NOT
               <img

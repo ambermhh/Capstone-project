@@ -8,18 +8,19 @@ import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import Logout from "./Logout";
 import PostForm from "./PostForm";
 
-const Profile = ({open, onClose}) => {
-  const navigate = useNavigate();
+const Profile = () => {
   const [error, setError] = useState(null);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
-  const [profilePicture, setProfilePicture] = useState({ preview: '', data: '' });
+  const [profilePicture, setProfilePicture] = useState({
+    preview: "",
+    data: "",
+  });
   const [signUpForm, setSignUpForm] = useState(false);
   const [recipeForm, setRecipeForm] = useState(false);
 
   const handleSignUpForm = () => {
     setSignUpForm(true);
   };
-
   if (error) {
     return (
       <Box id="profile-error">
@@ -62,7 +63,8 @@ const Profile = ({open, onClose}) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    axios.post(`http://localhost:8080/api/users/image/${userData._id}`, formData)
+    axios
+      .post(`http://localhost:8080/api/users/image/${userData._id}`, formData)
       .then((response) => {
         console.log(response);
         const updatedUser = {
@@ -71,7 +73,7 @@ const Profile = ({open, onClose}) => {
         };
         localStorage.setItem("currentUser", JSON.stringify(updatedUser));
         console.log(updatedUser);
-        setProfilePicture( response.data.data.profile_picture)
+        setProfilePicture(response.data.data.profile_picture);
       })
       .catch((error) => console.log(error));
   };
@@ -89,7 +91,7 @@ const Profile = ({open, onClose}) => {
         <Grid item>
           <Avatar
             alt="WN"
-            src={"http://localhost:8080" + (userData.profile_picture)}
+            src={"http://localhost:8080" + userData.profile_picture}
             onClick={handleAvatarClick}
             sx={{ width: 140, height: 140 }}
           >
@@ -119,7 +121,6 @@ const Profile = ({open, onClose}) => {
               display: "flex",
             }}
           >
-    
             <Typography variant="subtitle1">
               {userData.numFollowers} followers
             </Typography>
@@ -131,13 +132,23 @@ const Profile = ({open, onClose}) => {
             {userData.user_bio}
           </Typography>
         </Grid>
-      
-          <Button onClick={() => setRecipeForm(true)}>
-            <PostForm open={recipeForm} onClose={() => setRecipeForm(false)} />
-            <AddCircleOutlinedIcon id="post-button" />
-          </Button>
-       
+
       </Grid>
+      <Box sx={{textAlign:'center',m:2}}>
+        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
+          Follow
+        </Button>
+        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
+          Message
+        </Button>
+        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
+          Email
+        </Button>
+        <Button onClick={() => setRecipeForm(true)}>
+          <PostForm open={recipeForm} onClose={() => setRecipeForm(false)} />
+          <AddCircleOutlinedIcon id="post-button" />
+        </Button>
+      </Box>
       <Divider />
       <ProfileTabs />
     </>

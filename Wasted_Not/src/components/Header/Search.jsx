@@ -43,7 +43,7 @@ const Search = (props) => {
       const recipesData = recipesResponse.map((response) => response.data);
       console.log(recipesData);
       setResults(recipesData);
-      navigate("/recipePage");
+      navigate("/recipeSearchResults");
       setSearch("");
     } catch (error) {
       console.error(error);
@@ -70,3 +70,5 @@ const Search = (props) => {
 };
 
 export default Search;
+
+

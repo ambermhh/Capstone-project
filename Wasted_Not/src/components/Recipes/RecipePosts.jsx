@@ -13,8 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
 import axios from "axios";
@@ -30,15 +29,13 @@ export default function RecipesPost() {
   const [like, setLike] = React.useState([]);
   const [recipes, setRecipes] = React.useState([]);
   const userData = JSON.parse(localStorage.getItem("currentUser"));
- console.log(userData);
-
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/recipes/${userData._id}`)
       .then((response) => {
         console.log(response);
-      
+
         setRecipes(response.data.data);
       })
       .catch((error) => console.log(error));
@@ -47,14 +44,18 @@ export default function RecipesPost() {
   const handleLike = () => {};
 
   return (
-    <Cards>
-      <Grid container sx={{ margin: "2em" }}>
+    <Cards sx={{width:"100%"}}>
+      <Grid container gap={3} >
         {recipes.map((recipe) => (
-          <Grid item xs={3} key={recipe.id}>
-            <Card sx={{ maxWidth: 345 }}>
+          <Grid item key={recipe.id}>
+            <Card sx={{ maxWidth: 345, border:'2px solid black', boxShadow:'5px 5px 10px green' }}>
               <CardHeader
                 avatar={
-                  <Avatar color="fun" aria-label="recipe" src={"http://localhost:8080" + userData.profile_picture} />
+                  <Avatar
+                    color="fun"
+                    aria-label="recipe"
+                    src={"http://localhost:8080" + userData.profile_picture}
+                  />
                 }
                 action={
                   <IconButton
@@ -66,13 +67,14 @@ export default function RecipesPost() {
                     <BookmarkAdd />
                   </IconButton>
                 }
-                title={recipe.title}
-                subheader={recipe.date}
+                title={userData.username}
+                subheader={recipe.title}
+                
               />
               <CardMedia
                 component="img"
                 height="194"
-                image={recipe.image}
+                src={"http://localhost:8080" + recipe.image}
                 alt={recipe.title}
               />
               <CardContent>
@@ -100,8 +102,9 @@ export default function RecipesPost() {
                   )}
                 </IconButton>
                 <IconButton aria-label="share">
-                  <ShareIcon />
+                 <AddCommentOutlinedIcon/>
                 </IconButton>
+                {recipe.createdAt}
               </CardActions>
             </Card>
           </Grid>

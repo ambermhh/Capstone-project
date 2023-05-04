@@ -35,6 +35,7 @@ export default function Logout() {
         <Settings />
       </Button>
       <Menu
+        sx={{boxShadow:'10px 10px 50px grey'}}
         id="fade-menu"
         MenuListProps={{
           "aria-labelledby": "fade-button",
@@ -44,7 +45,10 @@ export default function Logout() {
         onClose={handleLogout}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleLogout}>LOG OUT</MenuItem>
+        <MenuItem >Edit Profile</MenuItem>
+        <MenuItem >Setting</MenuItem>
+        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+        
       </Menu>
     </div>
   );

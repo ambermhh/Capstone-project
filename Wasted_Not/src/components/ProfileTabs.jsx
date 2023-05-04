@@ -54,7 +54,7 @@ export default function ProfileTabs() {
           value={value}
           onChange={handleChange}
           variant="fullWidth"
-          textColor="primary"
+          textColor="secondary"
           sx={{ margin:'1rem'}}
         >
             <Tab sx={{fontSize:"18px"}} label="POSTS" {...a11yProps(0)} />

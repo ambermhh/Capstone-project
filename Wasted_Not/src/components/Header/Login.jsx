@@ -65,6 +65,7 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
             src="https://i.pinimg.com/564x/63/17/91/63179104985032222e40fbf9e6348af8.jpg"
           />
           <Box component="form" onSubmit={handleLogin}>
+        <DialogContent sx={{ height: "400px" }}>
             <DialogTitle sx={{ textAlign: "center", fontSize: "30px" }}>
               WASTED_NOT
             </DialogTitle>
@@ -80,12 +81,12 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
             >
               <CloseIcon />
             </Button>
-            <DialogContent sx={{ height: "400px" }}>
               <DialogContentText sx={{ textAlign: "center", fontSize: "25px" }}>
                 LOGIN
               </DialogContentText>
               <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
                 <TextField
+                fullWidth
                   sx={{ border: "2px solid black" }}
                   autoFocus
                   id="email"
@@ -96,8 +97,8 @@ function Login({ closeForm, loginOpen, toggleSignUpForm }) {
                   onChange={handleEmailChange}
                   required
                 />
-
                 <TextField
+                fullWidth
                   sx={{ border: "2px solid black" }}
                   id="password"
                   label="Password"

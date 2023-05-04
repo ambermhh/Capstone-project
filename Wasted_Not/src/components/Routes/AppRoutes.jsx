@@ -7,9 +7,9 @@ import AboutUs from "../Footers/AboutUs";
 import TermOfService from "../Footers/TermOfService";
 import Privacy from "../Footers/Privacy";
 import Weekdays from "../MealPlan/Weekdays";
-import RecipePage from "../Recipes/RecipePage";
 import RecipePosts from "../Recipes/RecipePosts";
 import RecipeFeed from "../Recipes/RecipeFeed";
+import RecipeSearchResults from "../Recipes/RecipeSearchResults";
 
 export default function AppRoutes(props) {
 
@@ -23,7 +23,7 @@ export default function AppRoutes(props) {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/termofservice" element={<TermOfService />} />
-        <Route path="/recipePage" element={<RecipePage />} />
+        <Route path="/recipeSearchResults" element={<RecipeSearchResults />} />
         <Route path="/recipeFeed" element={<RecipeFeed/>} />
       </Routes>
   );

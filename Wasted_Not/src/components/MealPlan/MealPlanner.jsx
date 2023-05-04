@@ -33,7 +33,7 @@ function MealPlanner({dayIndex, savedMealPlans, updateDayMeals}) {
   };
 
   return (
-    <div> {console.log(meals)}
+    <div id="meal-planner"> {console.log(meals)}
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Grid container spacing={2}>
           {meals.map((meal, index) => (

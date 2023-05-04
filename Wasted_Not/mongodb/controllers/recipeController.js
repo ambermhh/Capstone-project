@@ -14,7 +14,6 @@ const getUserPosts = (req, res) => {
   const user = req.params.id;
   console.log('getting posts for user '+user);
   
-  // Models.Recipe.findOne({ UserId: user })
   Models.Recipe.find({ UserId: user })
 
     .then((data) => {

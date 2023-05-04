@@ -29,7 +29,6 @@ export default function RecipeFeed() {
   const [expanded, setExpanded] = React.useState(0);
   const [like, setLike] = React.useState([]);
   const [recipes, setRecipes] = React.useState([]);
-  const [users, setUsers] = React.useState('');
  
 
 
@@ -42,15 +41,6 @@ export default function RecipeFeed() {
         setRecipes(response.data.data);
       })
       .catch((error) => console.log(error));
-      axios
-      .get(`http://localhost:8080/api/users/`)
-      .then((response) => {
-        console.log(response);
-      
-        setUsers(response.data.data);
-      })
-      .catch((error) => console.log(error));
-
   }, []);
 
  const handleLike = () => {};

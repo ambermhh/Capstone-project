@@ -24,7 +24,7 @@ export default function Subscription() {
   return (
     <div
       style={{     
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "white",
         padding: "20px",
       }}
     >

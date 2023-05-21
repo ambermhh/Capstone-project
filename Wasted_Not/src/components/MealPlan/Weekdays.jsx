@@ -156,13 +156,9 @@ export default function Weekdays() {
     setSavedMeals(mealsCopy);
   };
 
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
 
   return (
-    <div>
+    <div className="meal-plan">
       <Typography sx={{ padding: 3, textAlign: "center", fontSize: "50px" }}>
         Meal Planner
       </Typography>

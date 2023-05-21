@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import Subscription from "./Subscription";
-import { Box } from "@mui/material";
 
 export default function FooterButton() {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ export default function FooterButton() {
         <div
           style={{
             width: "100%",
-            backgroundColor: "#f5f5f5",
+            backgroundColor: "white",
             padding: "20px",
             display: "flex",
             justifyContent: "space-evenly",

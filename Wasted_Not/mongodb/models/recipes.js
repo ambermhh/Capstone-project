@@ -9,6 +9,7 @@ const recipeSchema = new Schema({
   instructions: { type: String, required: true },
   image: { type: String },
   UserId: { type: Schema.Types.ObjectId, ref: "User", require:true },
+  likes: {type: Number, default: 0},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

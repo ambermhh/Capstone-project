@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
 import ProfileTabs from "./ProfileTabs";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import SignUpForm from "./Header/SignUpForm";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import Logout from "./Logout";
@@ -80,77 +79,83 @@ const Profile = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="row"
-        gap={15}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ flex: "row", mb: 5, p: "4rem" }}
-      >
-        <Grid item>
-          <Avatar
-            alt="WN"
-            src={"http://localhost:8080" + userData.profile_picture}
-            onClick={handleAvatarClick}
-            sx={{ width: 140, height: 140 }}
-          >
-            <input
-              hidden
-              accept="image/*"
-              type="file"
-              id="profile-picture-input"
-              onChange={handleProfilePictureChange}
-            />
-          </Avatar>
-        </Grid>
-        <Grid item sx={{}}>
-          <Box sx={{ display: "flex" }}>
-            <Typography
-              variant="h4"
-              align="center"
-              sx={{ marginBottom: "0.5rem" }}
+      <div className="profile">
+        <Grid
+          container
+          direction="row"
+          gap={15}
+          justifyContent="center"
+          alignItems="center"
+          sx={{ flex: "row", mb: 5, p: "4rem" }}
+        >
+          <Grid item>
+            <Avatar
+              alt="WN"
+              src={"http://localhost:8080" + userData.profile_picture}
+              onClick={handleAvatarClick}
+              sx={{ width: 140, height: 140 }}
             >
-              {userData.username}
+              <input
+                hidden
+                accept="image/*"
+                type="file"
+                id="profile-picture-input"
+                onChange={handleProfilePictureChange}
+              />
+            </Avatar>
+          </Grid>
+          <Grid item sx={{}}>
+            <Box sx={{ display: "flex" }}>
+              <Typography
+                variant="h4"
+                align="center"
+                sx={{ marginBottom: "0.5rem" }}
+              >
+                {userData.username}
+              </Typography>
+              <Logout />
+            </Box>
+            <Box
+              gap={3}
+              sx={{
+                display: "flex",
+              }}
+            >
+              <Typography variant="subtitle1">
+                {userData.numFollowers} followers
+              </Typography>
+              <Typography variant="subtitle1">
+                {userData.numFollowing} following
+              </Typography>
+            </Box>
+            <Typography sx={{ textAlign: "start", pt: 3 }} variant="body1">
+              {userData.user_bio}
             </Typography>
-            <Logout />
-          </Box>
-          <Box
-            gap={3}
-            sx={{
-              display: "flex",
-            }}
-          >
-            <Typography variant="subtitle1">
-              {userData.numFollowers} followers
-            </Typography>
-            <Typography variant="subtitle1">
-              {userData.numFollowing} following
-            </Typography>
-          </Box>
-          <Typography sx={{ textAlign: "start", pt: 3 }} variant="body1">
-            {userData.user_bio}
-          </Typography>
+          </Grid>
         </Grid>
-
-      </Grid>
-      <Box sx={{textAlign:'center',m:2}}>
-        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
-          Follow
-        </Button>
-        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
-          Message
-        </Button>
-        <Button variant="contained" sx={{ border: "3px solid black", mr:3 }}>
-          Email
-        </Button>
-        <Button onClick={() => setRecipeForm(true)}>
-          <PostForm open={recipeForm} onClose={() => setRecipeForm(false)} />
-          <AddCircleOutlinedIcon id="post-button" />
-        </Button>
-      </Box>
-      <Divider />
-      <ProfileTabs />
+        <Box sx={{ textAlign: "center" }}>
+          <Button variant="contained" sx={{ border: "3px solid black", mr: 3 }}>
+            Follow
+          </Button>
+          <Button variant="contained" sx={{ border: "3px solid black", mr: 3 }}>
+            Message
+          </Button>
+          <Button variant="contained" sx={{ border: "3px solid black", mr: 3 }}>
+            Email
+          </Button>
+          <div className="tooltip">
+            <Button onClick={() => setRecipeForm(true)} >
+              <PostForm
+                open={recipeForm}
+                onClose={() => setRecipeForm(false)}
+              />
+              <AddCircleOutlinedIcon id="post-button" />
+            </Button>
+            <p className="tooltip-text">Post</p>
+        </div>
+        </Box>
+        <ProfileTabs />
+      </div>
     </>
   );
 };

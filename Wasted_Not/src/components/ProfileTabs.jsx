@@ -48,23 +48,33 @@ export default function ProfileTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%", margin:4 }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          textColor="secondary"
-          sx={{ margin:'1rem'}}
-        >
-            <Tab sx={{fontSize:"18px"}} label="POSTS" {...a11yProps(0)} />
-            <Tab sx={{fontSize:"18px"}} label="SAVED" {...a11yProps(1)} />
-            <Tab sx={{fontSize:"18px"}} label="MEAL PLANNER" {...a11yProps(2)} />
-        </Tabs>
+    <div className="profile-tab">
+      <Box sx={{ width: "100%", margin: 4 }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            textColor="secondary"
+            sx={{ margin: "1rem" }}
+          >
+            <Tab sx={{ fontSize: "18px" }} label="POSTS" {...a11yProps(0)} />
+            <Tab sx={{ fontSize: "18px" }} label="SAVED" {...a11yProps(1)} />
+            <Tab
+              sx={{ fontSize: "18px" }}
+              label="MEAL PLANNER"
+              {...a11yProps(2)}
+            />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <RecipesPost />
+        </TabPanel>
+        <TabPanel value={value} index={1}></TabPanel>
+        <TabPanel value={value} index={2}>
+          <Weekdays />
+        </TabPanel>
       </Box>
-      <TabPanel value={value} index={0}><RecipesPost/></TabPanel>
-      <TabPanel value={value} index={1}></TabPanel>
-      <TabPanel value={value} index={2}><Weekdays/></TabPanel>
-    </Box>
+    </div>
   );
 }

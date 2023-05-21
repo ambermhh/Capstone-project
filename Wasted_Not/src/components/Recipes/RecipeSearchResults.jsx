@@ -22,55 +22,61 @@ export default function RecipeSearchResults() {
   const { results } = useContext(RecipeSearchContext);
 
   return (
-    <Grid container spacing={2} sx={{ padding: 10 }} >
-      <Typography sx={{textAlign:'center', fontSize:60}}>RESULTS:</Typography>
-      
-      {results.map((recipe) => (
-        <Grid item sx={12} sm={3}>
-          <Card
-            sx={{ border: "3px solid black", boxShadow: "5px 5px 10px green" }}
-          >
-            <CardMedia
-              component="img"
-              alt={recipe.title}
-              height="200"
-              image={recipe.image}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {recipe.title}
-              </Typography>
-              <Typography color="text.secondary">
-                Servings: {recipe.servings}
-              </Typography>
-              <Typography>
-                Source: <Link to={recipe.sourceUrl}>{recipe.sourceName}</Link>
-              </Typography>
-              <Typography>
-                Cuisines: {recipe.cuisines && recipe.cuisines.join(", ")}
-              </Typography>
-              <Typography>
-                Dish Types:
-                {recipe.dishTypes &&
-                  recipe.dishTypes.map((type) => (
-                    <RecipeChip key={type} label={type} variant="outlined" />
-                  ))}
-              </Typography>
-              <Typography>
-                Diet:
-                {recipe.diets &&
-                  recipe.diets.map((diet) => (
-                    <RecipeChip key={diet} label={diet} variant="outlined" />
-                  ))}
-              </Typography>
-              {/* <Typography>
+    <div className="recipe-results">
+      <Grid container spacing={2} sx={{ padding: 10 }}>
+        <Typography sx={{ textAlign: "center", fontSize: 60 }}>
+          RESULTS:
+        </Typography>
+
+        {results.map((recipe) => (
+          <Grid item sx={12} sm={3}>
+            <Card
+              sx={{
+                border: "3px solid black",
+                boxShadow: "5px 5px 10px green",
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt={recipe.title}
+                height="200"
+                image={recipe.image}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {recipe.title}
+                </Typography>
+                <Typography color="text.secondary">
+                  Servings: {recipe.servings}
+                </Typography>
+                <Typography>
+                  Source: <Link to={recipe.sourceUrl}>{recipe.sourceName}</Link>
+                </Typography>
+                <Typography>
+                  Cuisines: {recipe.cuisines && recipe.cuisines.join(", ")}
+                </Typography>
+                <Typography>
+                  Dish Types:
+                  {recipe.dishTypes &&
+                    recipe.dishTypes.map((type) => (
+                      <RecipeChip key={type} label={type} variant="outlined" />
+                    ))}
+                </Typography>
+                <Typography>
+                  Diet:
+                  {recipe.diets &&
+                    recipe.diets.map((diet) => (
+                      <RecipeChip key={diet} label={diet} variant="outlined" />
+                    ))}
+                </Typography>
+                {/* <Typography>
               Ingredients:
                 {recipe.extendedIngredients &&
                   recipe.extendedIngredients.map((ingredient) => (
                     <RecipeChip key={ingredient.name}>{ingredient.originalString}</RecipeChip>
                   ))}
             </Typography> */}
-              {/* <Typography>
+                {/* <Typography>
               Instructions:
               <ol>
             {recipe.analyzedInstructions &&
@@ -81,14 +87,15 @@ export default function RecipeSearchResults() {
               )}
           </ol>
             </Typography> */}
-            </CardContent>
-            <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Share</Button>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
   );
 }

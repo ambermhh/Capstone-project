@@ -12,8 +12,8 @@ const getRecipe = (res) => {
 const getUserPosts = (req, res) => {
   // console.log(req.params.id);
   const user = req.params.id;
-  console.log('getting posts for user '+user);
-  
+  console.log("getting posts for user " + user);
+
   Models.Recipe.find({ UserId: user })
 
     .then((data) => {
@@ -31,10 +31,10 @@ const getUserPosts = (req, res) => {
 };
 
 const createRecipe = (req, res) => {
-  console.log(req.file) // saved filename is in req.file.filename
+  console.log(req.file); // saved filename is in req.file.filename
   const data = req.body;
-  data.image = "/images/" + req.file.filename
-  data.UserId = req.params.userid
+  data.image = "/images/" + req.file.filename;
+  data.UserId = req.params.userid;
   //creates a new user using JSON data POSTed in request body
   console.log(data);
   new Models.Recipe(data)
@@ -70,10 +70,9 @@ const deleteRecipe = (req, res) => {
     });
 };
 module.exports = {
-getRecipe,
-createRecipe,
-updateRecipe,
-deleteRecipe,
-getUserPosts
-
+  getRecipe,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  getUserPosts,
 };

@@ -6,7 +6,8 @@ export default function Privacy() {
     <div
       style={{
         padding: "4rem",
-        margin: "3rem",
+        marginLeft: "8rem",
+        marginRight: "8rem",
         display: "flex",
         justifyContent: "space-evenly",
       }}

@@ -1,5 +1,5 @@
 # Capstone-project
-Welcome to our zero waste food recipes sharing social media platform! Our platform is designed to help individuals reduce their food waste and share recipes with each other. In addition, we have added a meal planner feature to help you plan your meals and reduce the amount of food waste in your household.
+Welcome to my zero waste food recipes sharing social media platform! This platform is designed to help individuals reduce their food waste and share recipes with each other. In addition, I have added a meal planner feature to help you plan your meals and reduce the amount of food waste in your household.
 
 Features
 Browse and share zero waste food recipes with the community
@@ -23,4 +23,4 @@ Installation Instructions Authenticity
 These instructions were followed and tested on macOS 13 (Ventura) and everything worked as intended.
 
 Contributing
-We welcome contributions to our platform! If you would like to contribute, please submit a pull request with your changes.
+I welcome contributions to our platform! If you would like to contribute, please submit a pull request with your changes.
